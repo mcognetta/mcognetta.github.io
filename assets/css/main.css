@@ -6,6 +6,12 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
+/* COLORS
+	#493382 is the purple one
+	#1c1d21 is the grey background 
+	#add8e6 is the light blue
+*/
+
 /* Reset */
 
 	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
@@ -2566,7 +2572,7 @@
 					color: #1c1d21;
 				}
 
-				.wrapper.style1-alt .major.icon:before {
+				.wrapper.style1-alt .icon.major:before {
 					color: #1c1d21;
 				}
 
@@ -3257,7 +3263,7 @@
 		}
 
 		.wrapper.style1-alt {
-			background-color: #1c1d21;
+			background-color: #493382;
 		}
 
 		.wrapper.style2 {
