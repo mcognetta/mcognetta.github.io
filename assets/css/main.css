@@ -3771,7 +3771,7 @@
 			}
 
 			#sidebar nav a:before {
-				background: #3c2c62;
+				background: #1c1d21; /* This is the slider default color */
 			}
 
 			#sidebar nav a:after {
