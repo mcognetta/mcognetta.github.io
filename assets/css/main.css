@@ -2566,8 +2566,8 @@
 					color: #1c1d21;
 				}
 
-				.wrapper.style1-alt .icon.major:before {
-					color: #493382;
+				.wrapper.style1-alt .major.icon:before {
+					color: #1c1d21;
 				}
 
 				.wrapper.style2 .icon.major:before {
@@ -3257,7 +3257,7 @@
 		}
 
 		.wrapper.style1-alt {
-			background-color: #493382;
+			background-color: #1c1d21;
 		}
 
 		.wrapper.style2 {
