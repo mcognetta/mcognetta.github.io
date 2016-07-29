@@ -2552,7 +2552,7 @@
 			display: block;
 			background: #ffffff;
 			border-radius: 100%;
-			color: #312450;
+			color: #add8e6;
 			text-align: center;
 			line-height: 2.5em;
 			margin: 0 0 1.3em 0;
@@ -3249,7 +3249,7 @@
 			}
 
 		.wrapper.alt {
-			background-color: #1c1d21;
+			background-color: #add8e6;
 		}
 
 		.wrapper.style1 {
@@ -3273,7 +3273,7 @@
 		}
 
 		.wrapper.style3-alt {
-			background-color: #953d75;
+			background-color: #add8e6;
 		}
 
 		.wrapper.fullscreen {
@@ -3775,10 +3775,10 @@
 			}
 
 			#sidebar nav a:after {
-				background-image: -moz-linear-gradient(to right, #1c1d21, #b74e91);
-				background-image: -webkit-linear-gradient(to right, #1c1d21, #b74e91);
-				background-image: -ms-linear-gradient(to right, #1c1d21, #b74e91);
-				background-image: linear-gradient(to right, #1c1d21, #b74e91);
+				background-image: -moz-linear-gradient(to right, #1c1d21, #add8e6);
+				background-image: -webkit-linear-gradient(to right, #1c1d21, #add8e6);
+				background-image: -ms-linear-gradient(to right, #1c1d21, #add8e6);
+				background-image: linear-gradient(to right, #1c1d21, #add8e6);
 				-moz-transition: max-width 0.2s ease;
 				-webkit-transition: max-width 0.2s ease;
 				-ms-transition: max-width 0.2s ease;
