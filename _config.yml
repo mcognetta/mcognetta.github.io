@@ -11,8 +11,8 @@ title                    : "Theoretically Good With Computers"
 title_separator          : "-"
 name                     : "Marco Cognetta"
 description              : "Computer Science, Theoretically."
-url                      : https://theoreticallygoodwithcomputers.com #http://127.0.0.1:4000   # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
-baseurl                  : #"/mireg" # the subpath of your site, e.g. "/blog"
+url                      : #https://theoreticallygoodwithcomputers.com #http://127.0.0.1:4000   # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+baseurl                  : /mcognetta.github.io # the subpath of your site, e.g. "/blog"
 gh_repo                  :
 teaser                   : # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
 # breadcrumbs            : false # true, false (default)
