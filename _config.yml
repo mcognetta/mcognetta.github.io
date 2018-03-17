@@ -198,7 +198,7 @@ whitelist:
   - jekyll-feed
   - jemoji
 
-#remote_theme: mmistakes/minimal-mistakes
+remote_theme: mmistakes/minimal-mistakes
 
 
 # Archives
