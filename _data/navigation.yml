@@ -1,2 +1,7 @@
-# main links
 main:
+  - title: "CS Blog"
+    url: /Blog/
+  - title: "Korea Blog"
+    url: /Korea/
+  - title: "About"
+    url: /About/
