@@ -1,3 +1,12 @@
+PATH
+  remote: .
+  specs:
+    jekyll-whiteglass (1.6.1)
+      jekyll (~> 3.3)
+      jekyll-archives (~> 2.1)
+      jekyll-paginate (~> 1.1)
+      jekyll-sitemap (~> 1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -29,8 +38,6 @@ GEM
       safe_yaml (~> 1.0)
     jekyll-archives (2.1.1)
       jekyll (>= 2.4)
-    jekyll-feed (0.9.3)
-      jekyll (~> 3.3)
     jekyll-paginate (1.1.0)
     jekyll-sass-converter (1.5.2)
       sass (~> 3.4)
@@ -38,11 +45,6 @@ GEM
       jekyll (~> 3.3)
     jekyll-watch (2.0.0)
       listen (~> 3.0)
-    jekyll-whiteglass (1.6.1)
-      jekyll (~> 3.3)
-      jekyll-archives (~> 2.1)
-      jekyll-paginate (~> 1.1)
-      jekyll-sitemap (~> 1.0)
     kramdown (1.16.2)
     liquid (4.0.0)
     listen (3.1.5)
@@ -53,6 +55,7 @@ GEM
     pathutil (0.16.1)
       forwardable-extended (~> 2.6)
     public_suffix (3.0.2)
+    rake (10.5.0)
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
@@ -69,10 +72,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  jekyll (~> 3.8.0)
-  jekyll-feed (~> 0.6)
-  jekyll-whiteglass
-  tzinfo-data
+  bundler (~> 1.12)
+  jekyll-whiteglass!
+  rake
 
 BUNDLED WITH
    1.16.1
