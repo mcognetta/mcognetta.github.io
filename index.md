@@ -5,6 +5,16 @@
 layout: home
 ---
 
-Test 
+I am Marco Cognetta. I am currently a graduate student in the [Theory of Computation Lab](http://toc.yonsei.ac.kr) at Yonsei University.
 
-![Photo]({{ "../images/test_photo.jpg" | absolute_url })
+## Education
+* BS Discrete Mathematics, Georgia Institute of Technology (2015)
+* MS/PhD Computer Science, Yonsei University (2016-)
+
+
+## Links
+* [Github](http://github.com/mcognetta)
+* [Yonsei Theory of Computation Lab](http://toc.yonsei.ac.kr)
+<!---
+![Photo]({{ "../images/test_photo.jpg" | absolute_url }})
+--->

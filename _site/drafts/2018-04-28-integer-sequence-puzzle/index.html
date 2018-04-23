@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>Puzzle</title>
+  <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.">
+  
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/drafts/2018-04-28-integer-sequence-puzzle/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="Theoretically Good With Computers" href="http://localhost:4000/feed.xml">
+
+  
+
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:title" content="Puzzle">
+  <meta name="twitter:description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.">
+  
+  
+
+  <script type="text/javascript">
+  WebFontConfig = {
+    google: { families: [ 'Bitter:400,700,400italic:latin' ] }
+  };
+  (function(d) {
+    var wf = d.createElement('script'), s = d.scripts[0];
+    wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
+    wf.async = true;
+    s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+  
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Theoretically Good With Computers</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/blog/">Blog</a>
+      
+        
+        <a class="page-link" href="https://github.com/mcognetta">GitHub</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">Puzzle</h1>
+    
+    <p class="post-meta"><time datetime="2018-04-23T18:00:00+09:00" itemprop="datePublished">Apr 23, 2018</time> •
+  
+
+
+ •
+  
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>The following problem was posed to me by a friend:</p>
+
+<p>Given a number <script type="math/tex">N > 1</script> print out all sequences that begin with 0 and end at <script type="math/tex">N</script> where the difference between any two adjacent terms in a sequence is a non-negative power of 2.</p>
+
+<p>For example, the possible sequences for $N = 4$ are:</p>
+<ul>
+	<li>0, 1, 2, 3, 4</li>
+	<li>0, 1, 2, 4</li>
+	<li>0, 1, 3, 4</li>
+	<li>0, 2, 3, 4</li>
+	<li>0, 2, 4</li>
+	<li>0, 4</li>
+</ul>
+<p>This is the time where you should stop and see if you can come up with a solution.<!--more--></p>
+
+<p>The first approach you might consider is to just brute force it but this will definitely lead to a suboptimal solution.</p>
+
+<p>Instead, a recursive approach can be used. The first thing to note is that every sequence begins with <script type="math/tex">0</script> and is non-decreasing, so we can effectively disregard this term. The next key step comes from the following question: suppose you are finding the solutions for some <script type="math/tex">N</script> and you have already calculated a valid sequence up to <script type="math/tex">% <![CDATA[
+m<N %]]></script>. How many valid sequences are possible given that you have already reached <script type="math/tex">m</script>?</p>
+
+<p>In fact, it is exactly the number of sequences that start at <script type="math/tex">0</script> and go up to $N-m$ under the same conditions as before. This means, if we have already computed all of the sequences for each value <script type="math/tex">1 \le n \le N</script>, we can simply append the appropriate set of sequences to our current one after removing the <script type="math/tex">0</script> term and performing an offset calculation. For the offset, we increment each term in the sequence by <script type="math/tex">m</script>.</p>
+
+<p>Here is a worked example:</p>
+
+<p>Suppose we want to know all of the solutions for <script type="math/tex">N=7</script> and we have reached the point in the computation where we have generated the sequence <script type="math/tex">0, 1, 3</script>. Now we need to get from <script type="math/tex">3</script> to <script type="math/tex">7</script> with the difference between each pair of consecutive terms being a power of <script type="math/tex">2</script>.  The possible sequences are:</p>
+<ul>
+	<li>0, 1, 3, 4, 5, 6, 7</li>
+	<li>0, 1, 3, 4, 5, 7</li>
+	<li>0, 1, 3, 4, 6, 7</li>
+	<li>0, 1, 3, 5, 6, 7</li>
+	<li>0, 1, 3, 5, 7</li>
+	<li>0, 1, 3, 7</li>
+</ul>
+<p>which correspond exactly to the sequences that we found for the example of <script type="math/tex">N = 4</script>. For example, the sequence 0, 1, 3, 5, 7 is constructed by taking the sequence 0, 2, 4, removing the 0, and offsetting it by 3 before appending it to the already constructed sequence 0, 1, 3.</p>
+
+<p>Now we only need to know how to generate the initial sequences and then we can recursively solve this problem. Each sequence must start with 0, so the next number has to be a power of 2. Thus, we can just generate all of the sequences <script type="math/tex">[0, 2^i]</script> where <script type="math/tex">2^i \leq N</script> and then recursively solve the problem.</p>
+
+<p>Here is a snippet of Python code that solves the problem recursively:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">rec</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">N</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[[]]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">i</span><span class="o">=</span><span class="mi">0</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">while</span> <span class="mi">2</span><span class="o">**</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">N</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">rec</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span><span class="p">):</span>
+                <span class="n">new</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="p">[</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span><span class="o">+</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">temp</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+            <span class="n">i</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">return</span> <span class="n">result</span></code></pre></figure>
+
+<p>Unfortunately, this will run into a common problem with recursive algorithms. If I  compute the answer for the subproblem <script type="math/tex">N = 5</script> and need it again later, I have to compute it all over again since it is never stored. There are several ways of solving this problem (namely caching), so here we will present a dynamic programming solution.</p>
+
+<p>Instead of recursively calling our procedure every time we need the answer to a subproblem, we can iteratively build up all of the subproblems from 1 to <script type="math/tex">N</script> and call them as necessary.</p>
+
+<p>So, given <script type="math/tex">N</script>, we construct all solutions for <script type="math/tex">N=1, 2, \dots, N</script> in order, and whenever we need to use a previously computed answer, we simply look it up in some table.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">dp</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="p">[[[</span><span class="mi">0</span><span class="p">]],[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]]]</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">i</span><span class="o">=</span><span class="mi">0</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">while</span> <span class="mi">2</span><span class="o">**</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">k</span><span class="o">-</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">row</span> <span class="o">=</span> <span class="p">[[]]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">row</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span><span class="p">)]</span>
+            <span class="k">for</span> <span class="n">seq</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+                <span class="n">new</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="p">[</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span><span class="o">+</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+            <span class="n">i</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="n">table</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">table</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></code></pre></figure>
+
+<p>We can verify our results by checking the length of the output for <script type="math/tex">N</script> matches <script type="math/tex">a_N</script> in <a href="https://oeis.org/A023359" target="_blank">A023359</a> from the OEIS.</p>
+
+  </div>
+
+  
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="http://localhost:4000/feed.xml">RSS</a>
+
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+</html>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
