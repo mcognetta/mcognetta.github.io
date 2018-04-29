@@ -2,7 +2,10 @@
 layout: post
 title:  "First Conference Paper"
 date:   2018-04-29 12:50:00 +0900
-categories: papers cs automata
+categories: 
+ - papers
+ - cs
+ - automata
 ---
 My first conference paper entitled "Online Stochastic Pattern Matching" was accepted to CIAA'18. This paper was written with my advisor, Dr. Yo-Sub Han.
 
