@@ -1,7 +1,9 @@
-# If you want to link only specific pages in your header, add the path to the
-# pages in order as they should show up.
 main:
-  - title: "Blog"
-    url: /blog/
-  - title: "GitHub"
-    url: https://github.com/mcognetta
+  - title: "Posts"
+    url: /posts/
+  - title: "Categories"
+    url: /categories/
+  - title: "Tags"
+    url: /tags/
+  - title: "About"
+    url: /about/
