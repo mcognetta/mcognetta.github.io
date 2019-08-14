@@ -28,7 +28,8 @@
   
     
   
-  <meta name="description" content="When planning a small library in Julia, I kept running into a similar problem across all of the type systems that I tried when looking for the proper abstraction. Briefly, I had a single parametric abstract type at the top of an arbitrary type hierarchy (with any number of abstract and concrete types below it, possibly added later by a user) and I needed to write a function that would only work on objects with the same UnionAll types.">
+  <meta name="description" content="A gist with the code in this post can be found here.
+When planning a small library in Julia, I kept running into a similar problem across all of the type systems that I tried when looking for the proper abstraction. Briefly, I had a single parametric abstract type at the top of an arbitrary type hierarchy (with any number of abstract and concrete types below it, possibly added later by a user) and I needed to write a function that would only work on objects with the same UnionAll types.">
 
   
   <link rel="alternate" hreflang="en-us" href="https://mcognetta.github.io/post/dispatch_unionall/">
@@ -108,8 +109,9 @@
   
   <meta property="og:site_name" content="Marco">
   <meta property="og:url" content="https://mcognetta.github.io/post/dispatch_unionall/">
-  <meta property="og:title" content="Dispatching on types with the same UnionAll | Marco">
-  <meta property="og:description" content="When planning a small library in Julia, I kept running into a similar problem across all of the type systems that I tried when looking for the proper abstraction. Briefly, I had a single parametric abstract type at the top of an arbitrary type hierarchy (with any number of abstract and concrete types below it, possibly added later by a user) and I needed to write a function that would only work on objects with the same UnionAll types."><meta property="og:image" content="https://mcognetta.github.io/img/icon-192.png">
+  <meta property="og:title" content="Dispatching on types with the same UnionAll (but you don&#39;t know the types beforehand) | Marco">
+  <meta property="og:description" content="A gist with the code in this post can be found here.
+When planning a small library in Julia, I kept running into a similar problem across all of the type systems that I tried when looking for the proper abstraction. Briefly, I had a single parametric abstract type at the top of an arbitrary type hierarchy (with any number of abstract and concrete types below it, possibly added later by a user) and I needed to write a function that would only work on objects with the same UnionAll types."><meta property="og:image" content="https://mcognetta.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://mcognetta.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
@@ -127,7 +129,7 @@
 
 
 
-  <title>Dispatching on types with the same UnionAll | Marco</title>
+  <title>Dispatching on types with the same UnionAll (but you don&#39;t know the types beforehand) | Marco</title>
 
 </head>
 
@@ -308,10 +310,8 @@
   
   
 <div class="article-container pt-3">
-  <h1 itemprop="name">Dispatching on types with the same UnionAll</h1>
+  <h1 itemprop="name">Dispatching on types with the same UnionAll (but you don&#39;t know the types beforehand)</h1>
 
-  
-  <p class="page-subtitle">But you don&rsquo;t know the types beforehand</p>
   
 
   
@@ -354,7 +354,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    3 min read
+    4 min read
   </span>
   
 
@@ -382,7 +382,7 @@
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=https://mcognetta.github.io/post/dispatch_unionall/&amp;text=Dispatching%20on%20types%20with%20the%20same%20UnionAll" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=https://mcognetta.github.io/post/dispatch_unionall/&amp;text=Dispatching%20on%20types%20with%20the%20same%20UnionAll%20%28but%20you%20don&amp;#39;t%20know%20the%20types%20beforehand%29" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -395,7 +395,7 @@
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=https://mcognetta.github.io/post/dispatch_unionall/&amp;t=Dispatching%20on%20types%20with%20the%20same%20UnionAll" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https://mcognetta.github.io/post/dispatch_unionall/&amp;t=Dispatching%20on%20types%20with%20the%20same%20UnionAll%20%28but%20you%20don&amp;#39;t%20know%20the%20types%20beforehand%29" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook-f"></i>
         </a>
       </li>
@@ -408,7 +408,7 @@
       
       
       <li>
-        <a href="mailto:?subject=Dispatching%20on%20types%20with%20the%20same%20UnionAll&amp;body=https://mcognetta.github.io/post/dispatch_unionall/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Dispatching%20on%20types%20with%20the%20same%20UnionAll%20%28but%20you%20don&amp;#39;t%20know%20the%20types%20beforehand%29&amp;body=https://mcognetta.github.io/post/dispatch_unionall/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -421,7 +421,7 @@
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=https://mcognetta.github.io/post/dispatch_unionall/&amp;title=Dispatching%20on%20types%20with%20the%20same%20UnionAll" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=https://mcognetta.github.io/post/dispatch_unionall/&amp;title=Dispatching%20on%20types%20with%20the%20same%20UnionAll%20%28but%20you%20don&amp;#39;t%20know%20the%20types%20beforehand%29" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -434,7 +434,7 @@
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=Dispatching%20on%20types%20with%20the%20same%20UnionAll%20https://mcognetta.github.io/post/dispatch_unionall/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=Dispatching%20on%20types%20with%20the%20same%20UnionAll%20%28but%20you%20don&amp;#39;t%20know%20the%20types%20beforehand%29%20https://mcognetta.github.io/post/dispatch_unionall/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -447,7 +447,7 @@
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=https://mcognetta.github.io/post/dispatch_unionall/&amp;title=Dispatching%20on%20types%20with%20the%20same%20UnionAll" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https://mcognetta.github.io/post/dispatch_unionall/&amp;title=Dispatching%20on%20types%20with%20the%20same%20UnionAll%20%28but%20you%20don&amp;#39;t%20know%20the%20types%20beforehand%29" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -485,6 +485,8 @@
     <div class="article-style" itemprop="articleBody">
       
 
+<p>A gist with the code in this post can be found <a href="https://gist.github.com/mcognetta/a468889c2ea53b49d080c6d764f3b6da" target="_blank">here</a>.</p>
+
 <p>When planning a small library in Julia, I kept running into a similar problem across all of the type systems that I tried when looking for the proper abstraction. Briefly, I had a single parametric abstract type at the top of an arbitrary type hierarchy (with any number of abstract and concrete types below it, possibly added later by a user) and I needed to write a function that would only work on objects with the same UnionAll types. Furthermore, I wanted this to be automatic for all of the types in the aforementioned hierarchy without the user having to write any code.</p>
 
 <p>Here is a basic example. Suppose I have the types:</p>
@@ -519,7 +521,7 @@ f(y, z) # -&gt; fails
 <pre><code class="language-julia">f(::X, ::Y) where {T, S, U&lt;:A, X&lt;:U{T}, Y&lt;:U{S}} = ...
 </code></pre>
 
-<p>I was then pointed (by a JuliaLang member on Slack, though I can&rsquo;t remember which) to a partial solution of determining if two objects had the same UnionAll type:</p>
+<p>I was then pointed (by a JuliaLang member on Slack, though I can&rsquo;t remember who) to a partial solution of determining if two objects had the same UnionAll type:</p>
 
 <pre><code class="language-julia">sameunionall(::X, ::Y) where {X&lt;:A, Y&lt;:A} = !isabstracttype(typejoin(X, Y))
 </code></pre>
@@ -535,7 +537,7 @@ f(y, z) # -&gt; fails
 @traitdef SameUnionAll{X, Y}
 @traitimpl SameUnionAll{X, Y} &lt;- sameunionall(X, Y)
 @traitfn f(::X, ::Y) where {X&lt;:A, Y&lt;:A; SameUnionAll{X, Y}} = &quot;yo&quot;
-@traitfn f(::X, ::Y) where {X&lt;:A, Y&lt;:A; SameUnionAll{X, Y}} = &quot;nah&quot;
+@traitfn f(::X, ::Y) where {X&lt;:A, Y&lt;:A; !SameUnionAll{X, Y}} = &quot;nah&quot;
 </code></pre>
 
 <p>This can be tested out:</p>
@@ -543,9 +545,13 @@ f(y, z) # -&gt; fails
 <pre><code class="language-julia">x = B{Int64}()
 y = B{Float32}()
 z = C{Int64}()
-f(x, y) # &quot;yo&quot;
-f(x, z) # &quot;nah&quot;
-f(y, z) # &quot;nah&quot;
+f(x, y) # -&gt; &quot;yo&quot;
+f(x, z) # -&gt; &quot;nah&quot;
+f(y, z) # -&gt; &quot;nah&quot;
+
+struct G{T} &lt;: D{T} end
+f(G{Int16}(), x) # -&gt; &quot;nah&quot;
+f(G{Int16}(), G{BigFloat}()) # -&gt; &quot;yo&quot;
 </code></pre>
 
 <p>One important note is that <code>sameunionall</code> is a pure method so <code>f</code> does not fall back to dynamic dispatch. This can be verified by checking:</p>

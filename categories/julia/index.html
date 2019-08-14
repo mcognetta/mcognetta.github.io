@@ -322,10 +322,11 @@
   
   
   <div>
-    <h2><a href="/post/dispatch_unionall/">Dispatching on types with the same UnionAll</a></h2>
+    <h2><a href="/post/dispatch_unionall/">Dispatching on types with the same UnionAll (but you don&#39;t know the types beforehand)</a></h2>
     <div class="article-style">
       
-      When planning a small library in Julia, I kept running into a similar problem across all of the type systems that I tried when looking for the proper abstraction. Briefly, I had a single parametric abstract type at the top of an arbitrary type hierarchy (with any number of abstract and concrete types below it, possibly added later by a user) and I needed to write a function that would only work on objects with the same UnionAll types.
+      A gist with the code in this post can be found here.
+When planning a small library in Julia, I kept running into a similar problem across all of the type systems that I tried when looking for the proper abstraction. Briefly, I had a single parametric abstract type at the top of an arbitrary type hierarchy (with any number of abstract and concrete types below it, possibly added later by a user) and I needed to write a function that would only work on objects with the same UnionAll types.
       
     </div>
   </div>

@@ -13,11 +13,13 @@
     </image>
     
     <item>
-      <title>Dispatching on types with the same UnionAll</title>
+      <title>Dispatching on types with the same UnionAll (but you don&#39;t know the types beforehand)</title>
       <link>https://mcognetta.github.io/post/dispatch_unionall/</link>
       <pubDate>Tue, 13 Aug 2019 16:44:28 -0400</pubDate>
       <guid>https://mcognetta.github.io/post/dispatch_unionall/</guid>
       <description>
+
+&lt;p&gt;A gist with the code in this post can be found &lt;a href=&#34;https://gist.github.com/mcognetta/a468889c2ea53b49d080c6d764f3b6da&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;When planning a small library in Julia, I kept running into a similar problem across all of the type systems that I tried when looking for the proper abstraction. Briefly, I had a single parametric abstract type at the top of an arbitrary type hierarchy (with any number of abstract and concrete types below it, possibly added later by a user) and I needed to write a function that would only work on objects with the same UnionAll types. Furthermore, I wanted this to be automatic for all of the types in the aforementioned hierarchy without the user having to write any code.&lt;/p&gt;
 
@@ -53,7 +55,7 @@ f(y, z) # -&amp;gt; fails
 &lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;f(::X, ::Y) where {T, S, U&amp;lt;:A, X&amp;lt;:U{T}, Y&amp;lt;:U{S}} = ...
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;I was then pointed (by a JuliaLang member on Slack, though I can&amp;rsquo;t remember which) to a partial solution of determining if two objects had the same UnionAll type:&lt;/p&gt;
+&lt;p&gt;I was then pointed (by a JuliaLang member on Slack, though I can&amp;rsquo;t remember who) to a partial solution of determining if two objects had the same UnionAll type:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;sameunionall(::X, ::Y) where {X&amp;lt;:A, Y&amp;lt;:A} = !isabstracttype(typejoin(X, Y))
 &lt;/code&gt;&lt;/pre&gt;
@@ -69,7 +71,7 @@ f(y, z) # -&amp;gt; fails
 @traitdef SameUnionAll{X, Y}
 @traitimpl SameUnionAll{X, Y} &amp;lt;- sameunionall(X, Y)
 @traitfn f(::X, ::Y) where {X&amp;lt;:A, Y&amp;lt;:A; SameUnionAll{X, Y}} = &amp;quot;yo&amp;quot;
-@traitfn f(::X, ::Y) where {X&amp;lt;:A, Y&amp;lt;:A; SameUnionAll{X, Y}} = &amp;quot;nah&amp;quot;
+@traitfn f(::X, ::Y) where {X&amp;lt;:A, Y&amp;lt;:A; !SameUnionAll{X, Y}} = &amp;quot;nah&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;This can be tested out:&lt;/p&gt;
@@ -77,9 +79,13 @@ f(y, z) # -&amp;gt; fails
 &lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;x = B{Int64}()
 y = B{Float32}()
 z = C{Int64}()
-f(x, y) # &amp;quot;yo&amp;quot;
-f(x, z) # &amp;quot;nah&amp;quot;
-f(y, z) # &amp;quot;nah&amp;quot;
+f(x, y) # -&amp;gt; &amp;quot;yo&amp;quot;
+f(x, z) # -&amp;gt; &amp;quot;nah&amp;quot;
+f(y, z) # -&amp;gt; &amp;quot;nah&amp;quot;
+
+struct G{T} &amp;lt;: D{T} end
+f(G{Int16}(), x) # -&amp;gt; &amp;quot;nah&amp;quot;
+f(G{Int16}(), G{BigFloat}()) # -&amp;gt; &amp;quot;yo&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;One important note is that &lt;code&gt;sameunionall&lt;/code&gt; is a pure method so &lt;code&gt;f&lt;/code&gt; does not fall back to dynamic dispatch. This can be verified by checking:&lt;/p&gt;
