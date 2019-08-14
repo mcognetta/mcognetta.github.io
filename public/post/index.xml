@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts | Academic</title>
-    <link>/post/</link>
-      <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://mcognetta.github.io/post/</link>
+      <atom:link href="https://mcognetta.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 13 Aug 2019 16:44:28 -0400</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://mcognetta.github.io/img/icon-192.png</url>
       <title>Posts</title>
-      <link>/post/</link>
+      <link>https://mcognetta.github.io/post/</link>
     </image>
     
     <item>
       <title>Dispatching on types with the same UnionAll</title>
-      <link>/post/test/</link>
+      <link>https://mcognetta.github.io/post/test/</link>
       <pubDate>Tue, 13 Aug 2019 16:44:28 -0400</pubDate>
-      <guid>/post/test/</guid>
+      <guid>https://mcognetta.github.io/post/test/</guid>
       <description>
 
 &lt;p&gt;When planning a small library in Julia, I kept running into a similar problem across all of the type systems that I tried to find the proper abstraction. Briefly, I had a single parametric abstract type at the top of an arbitrary type hierarchy (with any number of abstract and concrete types below it, possibly added later by a user) and I needed to write a function that would only work on objects with the same UnionAll types. Furthermore, I wanted this to be automatic for all of the types in the aforementioned hierarchy without the user having to write any code.&lt;/p&gt;
