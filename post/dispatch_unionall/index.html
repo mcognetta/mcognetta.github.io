@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content="When planning a small library in Julia, I kept running into a similar problem across all of the type systems that I tried to find the proper abstraction. Briefly, I had a single parametric abstract type at the top of an arbitrary type hierarchy (with any number of abstract and concrete types below it, possibly added later by a user) and I needed to write a function that would only work on objects with the same UnionAll types.">
+  <meta name="description" content="When planning a small library in Julia, I kept running into a similar problem across all of the type systems that I tried when looking for the proper abstraction. Briefly, I had a single parametric abstract type at the top of an arbitrary type hierarchy (with any number of abstract and concrete types below it, possibly added later by a user) and I needed to write a function that would only work on objects with the same UnionAll types.">
 
   
   <link rel="alternate" hreflang="en-us" href="https://mcognetta.github.io/post/dispatch_unionall/">
@@ -109,7 +109,7 @@
   <meta property="og:site_name" content="Marco">
   <meta property="og:url" content="https://mcognetta.github.io/post/dispatch_unionall/">
   <meta property="og:title" content="Dispatching on types with the same UnionAll | Marco">
-  <meta property="og:description" content="When planning a small library in Julia, I kept running into a similar problem across all of the type systems that I tried to find the proper abstraction. Briefly, I had a single parametric abstract type at the top of an arbitrary type hierarchy (with any number of abstract and concrete types below it, possibly added later by a user) and I needed to write a function that would only work on objects with the same UnionAll types."><meta property="og:image" content="https://mcognetta.github.io/img/icon-192.png">
+  <meta property="og:description" content="When planning a small library in Julia, I kept running into a similar problem across all of the type systems that I tried when looking for the proper abstraction. Briefly, I had a single parametric abstract type at the top of an arbitrary type hierarchy (with any number of abstract and concrete types below it, possibly added later by a user) and I needed to write a function that would only work on objects with the same UnionAll types."><meta property="og:image" content="https://mcognetta.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://mcognetta.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
     
@@ -485,7 +485,7 @@
     <div class="article-style" itemprop="articleBody">
       
 
-<p>When planning a small library in Julia, I kept running into a similar problem across all of the type systems that I tried to find the proper abstraction. Briefly, I had a single parametric abstract type at the top of an arbitrary type hierarchy (with any number of abstract and concrete types below it, possibly added later by a user) and I needed to write a function that would only work on objects with the same UnionAll types. Furthermore, I wanted this to be automatic for all of the types in the aforementioned hierarchy without the user having to write any code.</p>
+<p>When planning a small library in Julia, I kept running into a similar problem across all of the type systems that I tried when looking for the proper abstraction. Briefly, I had a single parametric abstract type at the top of an arbitrary type hierarchy (with any number of abstract and concrete types below it, possibly added later by a user) and I needed to write a function that would only work on objects with the same UnionAll types. Furthermore, I wanted this to be automatic for all of the types in the aforementioned hierarchy without the user having to write any code.</p>
 
 <p>Here is a basic example. Suppose I have the types:</p>
 
@@ -559,7 +559,7 @@ Body::String
 1 ─     return &quot;nah&quot;
 </code></pre>
 
-<p>This trick will be expanded on in a future post, but to whet the appetite I will briefly introduce the exact use case that I have. Suppose I have the following structure, where more special algebra types can be added at will by the user:</p>
+<p>This trick will be expanded on in a future post, but to whet the appetite I will briefly introduce the exact use case that I have. Suppose I have the following structure, where more &ldquo;special algebra&rdquo; types can be added at will by the user:</p>
 
 <pre><code class="language-julia">abstract type AbstractAlgebraElement{T} end
 struct SpecialAlgebraElement{T&lt;:Real} &lt;: AbstractAlgebraElement{T} end

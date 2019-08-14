@@ -31,7 +31,7 @@
     
   </channel>
 </rss>
-. Furthermore, I wanted this to be automatic for all of the types in the aforementioned hierarchy without the user having to write any code.&lt;/p&gt;
+All types. Furthermore, I wanted this to be automatic for all of the types in the aforementioned hierarchy without the user having to write any code.&lt;/p&gt;
 
 &lt;p&gt;Here is a basic example. Suppose I have the types:&lt;/p&gt;
 
@@ -105,7 +105,7 @@ Body::String
 1 ─     return &amp;quot;nah&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;This trick will be expanded on in a future post, but to whet the appetite I will briefly introduce the exact use case that I have. Suppose I have the following structure, where more special algebra types can be added at will by the user:&lt;/p&gt;
+&lt;p&gt;This trick will be expanded on in a future post, but to whet the appetite I will briefly introduce the exact use case that I have. Suppose I have the following structure, where more &amp;ldquo;special algebra&amp;rdquo; types can be added at will by the user:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;abstract type AbstractAlgebraElement{T} end
 struct SpecialAlgebraElement{T&amp;lt;:Real} &amp;lt;: AbstractAlgebraElement{T} end
