@@ -28,10 +28,10 @@
   
     
   
-  <meta name="description" content="Software Engineer">
+  <meta name="description" content="When planning a small library in Julia, I kept running into a similar problem across all of the type systems that I tried to find the proper abstraction. Briefly, I had a single parametric abstract type at the top of an arbitrary type hierarchy (with any number of abstract and concrete types below it, possibly added later by a user) and I needed to write a function that would only work on objects with the same UnionAll types.">
 
   
-  <link rel="alternate" hreflang="en-us" href="https://mcognetta.github.io/post/">
+  <link rel="alternate" hreflang="en-us" href="https://mcognetta.github.io/post/dispatch_unionall/">
 
   
 
@@ -89,14 +89,12 @@
   
 
   
-  <link rel="alternate" href="/post/index.xml" type="application/rss+xml" title="Academic">
-  
 
   <link rel="manifest" href="/index.webmanifest">
   <link rel="icon" type="image/png" href="/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="https://mcognetta.github.io/post/">
+  <link rel="canonical" href="https://mcognetta.github.io/post/dispatch_unionall/">
 
   
   
@@ -109,12 +107,15 @@
   <meta property="twitter:card" content="summary">
   
   <meta property="og:site_name" content="Academic">
-  <meta property="og:url" content="https://mcognetta.github.io/post/">
-  <meta property="og:title" content="Posts | Academic">
-  <meta property="og:description" content="Software Engineer"><meta property="og:image" content="https://mcognetta.github.io/img/icon-192.png">
+  <meta property="og:url" content="https://mcognetta.github.io/post/dispatch_unionall/">
+  <meta property="og:title" content="Dispatching on types with the same UnionAll | Academic">
+  <meta property="og:description" content="When planning a small library in Julia, I kept running into a similar problem across all of the type systems that I tried to find the proper abstraction. Briefly, I had a single parametric abstract type at the top of an arbitrary type hierarchy (with any number of abstract and concrete types below it, possibly added later by a user) and I needed to write a function that would only work on objects with the same UnionAll types."><meta property="og:image" content="https://mcognetta.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://mcognetta.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
   
-    <meta property="og:updated_time" content="2019-08-13T16:44:28-04:00">
+    
+      <meta property="article:published_time" content="2019-08-13T16:44:28-04:00">
+    
+    <meta property="article:modified_time" content="2019-08-13T16:44:28-04:00">
   
 
   
@@ -126,7 +127,7 @@
 
 
 
-  <title>Posts | Academic</title>
+  <title>Dispatching on types with the same UnionAll | Academic</title>
 
 </head>
 
@@ -286,82 +287,35 @@
 </nav>
 
 
-  
-
-
-
-
-
-
-
-
-
-
-
+  <article class="article" itemscope itemtype="http://schema.org/Article">
 
   
 
+
+
+
+
+
+
+
+
+
+
+
+  
+
   
   
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Dispatching on types with the same UnionAll</h1>
+
+  
+  <p class="page-subtitle">But you don&rsquo;t know the types beforehand</p>
+  
+
   
     
-  
-<div class="universal-wrapper pt-3">
-  <h1 itemprop="name">Posts</h1>
-
-  
-
-  
-</div>
-
-
-
-<div class="universal-wrapper">
-
-  
-
-  
-  
-    
-      
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-<div class="media stream-item" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0" itemprop="name">
-      <a href="/post/dispatch_unionall/"  itemprop="url">Dispatching on types with the same UnionAll</a>
-    </h3>
-
-    
-    <div class="article-style" itemprop="articleBody">
-      When planning a small library in Julia, I kept running into a similar problem across all of the type systems that I tried to find the …
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
-      
-        
 
 
 
@@ -416,28 +370,273 @@
   
 
   
+    
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://mcognetta.github.io/post/dispatch_unionall/&amp;text=Dispatching%20on%20types%20with%20the%20same%20UnionAll" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://mcognetta.github.io/post/dispatch_unionall/&amp;t=Dispatching%20on%20types%20with%20the%20same%20UnionAll" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Dispatching%20on%20types%20with%20the%20same%20UnionAll&amp;body=https://mcognetta.github.io/post/dispatch_unionall/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://mcognetta.github.io/post/dispatch_unionall/&amp;title=Dispatching%20on%20types%20with%20the%20same%20UnionAll" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Dispatching%20on%20types%20with%20the%20same%20UnionAll%20https://mcognetta.github.io/post/dispatch_unionall/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://mcognetta.github.io/post/dispatch_unionall/&amp;title=Dispatching%20on%20types%20with%20the%20same%20UnionAll" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
 
 </div>
 
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
       
+
+<p>When planning a small library in Julia, I kept running into a similar problem across all of the type systems that I tried to find the proper abstraction. Briefly, I had a single parametric abstract type at the top of an arbitrary type hierarchy (with any number of abstract and concrete types below it, possibly added later by a user) and I needed to write a function that would only work on objects with the same UnionAll types. Furthermore, I wanted this to be automatic for all of the types in the aforementioned hierarchy without the user having to write any code.</p>
+
+<p>Here is a basic example. Suppose I have the types:</p>
+
+<pre><code class="language-julia">abstract type A{T} end
+struct B{T} &lt;: A{T} end
+struct C{T} &lt;: A{T} end
+abstract type D{T} &lt;: A{T} end
+struct E{T} &lt;: D{T} end
+struct F{T} &lt;: D{T} end
+</code></pre>
+
+<p>Here, <code>D</code>, <code>E</code>, and <code>F</code> are included to demonstrate that the type hierarchy can be arbitrarily complex and extended at any time by the user.</p>
+
+<p>I want to define a function <code>f(x, y)</code> that does something when <code>x</code> and <code>y</code> come from the same UnionAll type, even if they are parameterized differently, and fails otherwise. For example:</p>
+
+<pre><code class="language-julia">x = B{Int64}()
+y = B{Float32}()
+z = C{Int64}()
+
+f(x, y) # -&gt; does something
+f(x, z) # -&gt; fails
+f(y, z) # -&gt; fails
+</code></pre>
+
+<p>A simple solution to this is to just require the user to implement <code>f</code> for their new types while providing a fall back <code>f(::A, ::A)</code> that fails. However, the library that I am writing has a very natural interface and adding more to it would have been undesirable. Also, this struck me as something that <em>should</em> be possible programmatically.</p>
+
+<p>My first attempt to do it programmatically lead to method signatures similar to:</p>
+
+<h4 id="nb-this-is-neither-valid-nor-good-julia-code-1">NB: this is neither valid nor good Julia code <sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup></h4>
+
+<pre><code class="language-julia">f(::X, ::Y) where {T, S, U&lt;:A, X&lt;:U{T}, Y&lt;:U{S}} = ...
+</code></pre>
+
+<p>I was then pointed (by a JuliaLang member on Slack, though I can&rsquo;t remember which) to a partial solution of determining if two objects had the same UnionAll type:</p>
+
+<pre><code class="language-julia">sameunionall(::X, ::Y) where {X&lt;:A, Y&lt;:A} = !isabstracttype(typejoin(X, Y))
+</code></pre>
+
+<p>This can be rewritten for types as:</p>
+
+<pre><code class="language-julia">sameunionall(::Type{X}, ::Type{Y}) where {X&lt;:A, Y&lt;:A} = !isabstracttype(typejoin(X, Y))
+</code></pre>
+
+<p>Combining this with &lsquo;Holy-Traits&rsquo; <sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup> via <a href="https://github.com/mauro3/SimpleTraits.jl" target="_blank">SimpleTraits.jl</a> leads to a nice solution:</p>
+
+<pre><code class="language-julia">using SimpleTraits
+@traitdef SameUnionAll{X, Y}
+@traitimpl SameUnionAll{X, Y} &lt;- sameunionall(X, Y)
+@traitfn f(::X, ::Y) where {X&lt;:A, Y&lt;:A; SameUnionAll{X, Y}} = &quot;yo&quot;
+@traitfn f(::X, ::Y) where {X&lt;:A, Y&lt;:A; SameUnionAll{X, Y}} = &quot;nah&quot;
+</code></pre>
+
+<p>This can be tested out:</p>
+
+<pre><code class="language-julia">x = B{Int64}()
+y = B{Float32}()
+z = C{Int64}()
+f(x, y) # &quot;yo&quot;
+f(x, z) # &quot;nah&quot;
+f(y, z) # &quot;nah&quot;
+</code></pre>
+
+<p>One important note is that <code>sameunionall</code> is a pure method so <code>f</code> does not fall back to dynamic dispatch. This can be verified by checking:</p>
+
+<pre><code class="language-julia">julia&gt; @code_warntype f(x, y)
+Body::String
+1 ─     return &quot;yo&quot;
+
+julia&gt; @code_warntype f(x, z)
+Body::String
+1 ─     return &quot;nah&quot;
+</code></pre>
+
+<p>This trick will be expanded on in a future post, but to whet the appetite I will briefly introduce the exact use case that I have. Suppose I have the following structure, where more special algebra types can be added at will by the user:</p>
+
+<pre><code class="language-julia">abstract type AbstractAlgebraElement{T} end
+struct SpecialAlgebraElement{T&lt;:Real} &lt;: AbstractAlgebraElement{T} end
+struct DifferentAlgebraElement{T&lt;:Number} &lt;: AbstractAlgebraElement{T} end
+</code></pre>
+
+<p>Objects of the same algebraic type but with different parameters should be compatible (for example, a ring of real numbers represented by <code>Float32</code> vs one represented by <code>Float64</code> are essentially the same thing here). As such, we should be able to promote between them so that this should work:</p>
+
+<pre><code class="language-julia">promote_type(SpecialAlgebraElement{Float64}, SpecialAlgebraElement{Float16}) # -&gt; SpecialAlgebraElement{Float64}
+</code></pre>
+
+<p>but this should fail:</p>
+
+<pre><code class="language-julia">promote_type(SpecialAlgebraElement{Float64}, DifferentAlgebraElement{Float16})
+</code></pre>
+
+<p>As a final note, more idiomatic Julia code, comments, criticisms, etc. are always welcome. Please feel free to email me.</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">Examples of good but not valid Julia code are left as an exercise.
+ <a class="footnote-return" href="#fnref:1"><sup>^</sup></a></li>
+<li id="fn:2"><a href="https://github.com/JuliaLang/julia/issues/2345#issuecomment-54537633" target="_blank">https://github.com/JuliaLang/julia/issues/2345#issuecomment-54537633</a>
+ <a class="footnote-return" href="#fnref:2"><sup>^</sup></a></li>
+</ol>
+</div>
+
     </div>
 
     
 
-  </div>
-  <div class="ml-3">
+
     
-    
-  </div>
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/julia/">Julia</a>
+  
 </div>
 
+
+
+    
+      
+
+
+
+
+
+
+
+
+  
+  
     
   
-
   
 
 
-</div>
+
+
+
+
+
+      
+      
+    
+
+    
+
+    
+
+
+  </div>
+</article>
 
       
 
