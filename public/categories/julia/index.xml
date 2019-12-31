@@ -2,126 +2,87 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Julia | Academic</title>
-    <link>https://mcognetta.github.io/categories/julia/</link>
-      <atom:link href="https://mcognetta.github.io/categories/julia/index.xml" rel="self" type="application/rss+xml" />
+    <link>/categories/julia/</link>
+      <atom:link href="/categories/julia/index.xml" rel="self" type="application/rss+xml" />
     <description>Julia</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 13 Aug 2019 16:44:28 -0400</lastBuildDate>
     <image>
-      <url>https://mcognetta.github.io/img/icon-192.png</url>
+      <url>/img/icon-192.png</url>
       <title>Julia</title>
-      <link>https://mcognetta.github.io/categories/julia/</link>
+      <link>/categories/julia/</link>
     </image>
     
     <item>
       <title>Dispatching on types with the same UnionAll</title>
-      <link>https://mcognetta.github.io/post/test/</link>
+      <link>/post/test/</link>
       <pubDate>Tue, 13 Aug 2019 16:44:28 -0400</pubDate>
-      <guid>https://mcognetta.github.io/post/test/</guid>
-      <description>
-
-&lt;p&gt;When planning a small library in Julia, I kept running into a similar problem across all of the type systems that I tried to find the proper abstraction. Briefly, I had a single parametric abstract type at the top of an arbitrary type hierarchy (with any number of abstract and concrete types below it, possibly added later by a user) and I needed to write a function that would only work on objects with the same UnionAll types. Furthermore, I wanted this to be automatic for all of the types in the aforementioned hierarchy without the user having to write any code.&lt;/p&gt;
-
+      <guid>/post/test/</guid>
+      <description>&lt;p&gt;When planning a small library in Julia, I kept running into a similar problem across all of the type systems that I tried to find the proper abstraction. Briefly, I had a single parametric abstract type at the top of an arbitrary type hierarchy (with any number of abstract and concrete types below it, possibly added later by a user) and I needed to write a function that would only work on objects with the same UnionAll types. Furthermore, I wanted this to be automatic for all of the types in the aforementioned hierarchy without the user having to write any code.&lt;/p&gt;
 &lt;p&gt;Here is a basic example. Suppose I have the types:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;abstract type A{T} end
-struct B{T} &amp;lt;: A{T} end
-struct C{T} &amp;lt;: A{T} end
-abstract type D{T} &amp;lt;: A{T} end
-struct E{T} &amp;lt;: D{T} end
-struct F{T} &amp;lt;: D{T} end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Here, &lt;code&gt;D&lt;/code&gt;, &lt;code&gt;E&lt;/code&gt;, and &lt;code&gt;F&lt;/code&gt; are included to demonstrate that the type hierarchy can be arbitrarily complex and extended at any time by the user.&lt;/p&gt;
-
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;abstract type&lt;/span&gt; A&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{T&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#66d9ef&#34;&gt;end&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; B&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{T&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; A&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{T&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#66d9ef&#34;&gt;end&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; C&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{T&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; A&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{T&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#66d9ef&#34;&gt;end&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;abstract type&lt;/span&gt; D&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{T&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; A&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{T&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#66d9ef&#34;&gt;end&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; E&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{T&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; D&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{T&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#66d9ef&#34;&gt;end&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; F&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{T&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; D&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{T&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#66d9ef&#34;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Here, &lt;code&gt;D&lt;/code&gt;, &lt;code&gt;E&lt;/code&gt;, and &lt;code&gt;F&lt;/code&gt; are included to demonstrate that the type hierarchy can be arbitrarily complex and extended at any time by the user.&lt;/p&gt;
 &lt;p&gt;I want to define a function &lt;code&gt;f(x, y)&lt;/code&gt; that does something when &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt; come from the same UnionAll type, even if they are parameterized differently, and fails otherwise. For example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;x&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; B&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{&lt;span style=&#34;color:#66d9ef&#34;&gt;Int64&lt;/span&gt;}()
+y&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; B&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{&lt;span style=&#34;color:#66d9ef&#34;&gt;Float32&lt;/span&gt;}()
+z&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; C&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{&lt;span style=&#34;color:#66d9ef&#34;&gt;Int64&lt;/span&gt;}()
 
-&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;x = B{Int64}()
-y = B{Float32}()
-z = C{Int64}()
-
-f(x, y) # -&amp;gt; does something
-f(x, z) # -&amp;gt; fails
-f(y, z) # -&amp;gt; fails
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;A simple solution to this is to just require the user to implement &lt;code&gt;f&lt;/code&gt; for their new types while providing a fall back &lt;code&gt;f(::A, ::A)&lt;/code&gt; that fails. However, the library that I am writing has a very natural interface and adding more to it would have been undesirable. Also, this struck me as something that &lt;em&gt;should&lt;/em&gt; be possible programmatically.&lt;/p&gt;
-
+f&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;(x&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;, y&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;# -&amp;gt; does something&lt;/span&gt;
+f&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;(x&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;, z&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;# -&amp;gt; fails&lt;/span&gt;
+f&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;(y&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;, z&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;# -&amp;gt; fails&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;A simple solution to this is to just require the user to implement &lt;code&gt;f&lt;/code&gt; for their new types while providing a fall back &lt;code&gt;f(::A, ::A)&lt;/code&gt; that fails. However, the library that I am writing has a very natural interface and adding more to it would have been undesirable. Also, this struck me as something that &lt;em&gt;should&lt;/em&gt; be possible programmatically.&lt;/p&gt;
 &lt;p&gt;My first attempt to do it programmatically lead to method signatures similar to:&lt;/p&gt;
+&lt;h4 id=&#34;nb-this-is-neither-valid-nor-good-julia-code-1&#34;&gt;NB: this is neither valid nor good Julia code &lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;f&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;X&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;Y&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;) where&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt; {T&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;, S&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;, U&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;A&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;, X&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;U&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{T&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;}, Y&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;U&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{S&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;}} &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I was then pointed (by a JuliaLang member on Slack, though I can&#39;t remember which) to a partial solution of determining if two objects had the same UnionAll type:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;sameunionall&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;X&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;Y&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;) where&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt; {X&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;A&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;, Y&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;A&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;isabstracttype&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;(typejoin&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;(X&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;, Y&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This can be rewritten for types as:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;sameunionall&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;Type&lt;/span&gt;{X&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;}, &lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;Type&lt;/span&gt;{Y&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;}) where&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt; {X&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;A&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;, Y&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;A&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;isabstracttype&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;(typejoin&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;(X&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;, Y&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Combining this with &amp;lsquo;Holy-Traits&amp;rsquo; &lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; via &lt;a href=&#34;https://github.com/mauro3/SimpleTraits.jl&#34;&gt;SimpleTraits.jl&lt;/a&gt; leads to a nice solution:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; SimpleTraits&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;@traitdef&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt; SameUnionAll&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{X&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;, Y&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;}
+&lt;span style=&#34;color:#a6e22e&#34;&gt;@traitimpl&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt; SameUnionAll&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{X&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;, Y&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; sameunionall&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;(X&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;, Y&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;)
+&lt;span style=&#34;color:#a6e22e&#34;&gt;@traitfn&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt; f&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;X&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;Y&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;) where&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt; {X&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;A&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;, Y&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;A&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;; SameUnionAll&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{X&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;, Y&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;}} &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;y&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;o&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;@traitfn&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt; f&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;X&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;Y&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;) where&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt; {X&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;A&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;, Y&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;A&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;; SameUnionAll&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{X&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;, Y&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;}} &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;h&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This can be tested out:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;x&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; B&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{&lt;span style=&#34;color:#66d9ef&#34;&gt;Int64&lt;/span&gt;}()
+y&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; B&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{&lt;span style=&#34;color:#66d9ef&#34;&gt;Float32&lt;/span&gt;}()
+z&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; C&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{&lt;span style=&#34;color:#66d9ef&#34;&gt;Int64&lt;/span&gt;}()
+f&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;(x&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;, y&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;# &amp;#34;yo&amp;#34;&lt;/span&gt;
+f&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;(x&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;, z&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;# &amp;#34;nah&amp;#34;&lt;/span&gt;
+f&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;(y&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;, z&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;# &amp;#34;nah&amp;#34;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;One important note is that &lt;code&gt;sameunionall&lt;/code&gt; is a pure method so &lt;code&gt;f&lt;/code&gt; does not fall back to dynamic dispatch. This can be verified by checking:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;julia&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;@code_warntype&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt; f&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;(x&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;, y&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;)
+Body&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;String&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; ─&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;     &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;y&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;o&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
 
-&lt;h4 id=&#34;nb-this-is-neither-valid-nor-good-julia-code-1&#34;&gt;NB: this is neither valid nor good Julia code &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;f(::X, ::Y) where {T, S, U&amp;lt;:A, X&amp;lt;:U{T}, Y&amp;lt;:U{S}} = ...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I was then pointed (by a JuliaLang member on Slack, though I can&amp;rsquo;t remember which) to a partial solution of determining if two objects had the same UnionAll type:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;sameunionall(::X, ::Y) where {X&amp;lt;:A, Y&amp;lt;:A} = !isabstracttype(typejoin(X, Y))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This can be rewritten for types as:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;sameunionall(::Type{X}, ::Type{Y}) where {X&amp;lt;:A, Y&amp;lt;:A} = !isabstracttype(typejoin(X, Y))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Combining this with &amp;lsquo;Holy-Traits&amp;rsquo; &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; via &lt;a href=&#34;https://github.com/mauro3/SimpleTraits.jl&#34; target=&#34;_blank&#34;&gt;SimpleTraits.jl&lt;/a&gt; leads to a nice solution:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;using SimpleTraits
-@traitdef SameUnionAll{X, Y}
-@traitimpl SameUnionAll{X, Y} &amp;lt;- sameunionall(X, Y)
-@traitfn f(::X, ::Y) where {X&amp;lt;:A, Y&amp;lt;:A; SameUnionAll{X, Y}} = &amp;quot;yo&amp;quot;
-@traitfn f(::X, ::Y) where {X&amp;lt;:A, Y&amp;lt;:A; SameUnionAll{X, Y}} = &amp;quot;nah&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This can be tested out:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;x = B{Int64}()
-y = B{Float32}()
-z = C{Int64}()
-f(x, y) # &amp;quot;yo&amp;quot;
-f(x, z) # &amp;quot;nah&amp;quot;
-f(y, z) # &amp;quot;nah&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;One important note is that &lt;code&gt;sameunionall&lt;/code&gt; is a pure method so &lt;code&gt;f&lt;/code&gt; does not fall back to dynamic dispatch. This can be verified by checking:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;julia&amp;gt; @code_warntype f(x, y)
-Body::String
-1 ─     return &amp;quot;yo&amp;quot;
-
-julia&amp;gt; @code_warntype f(x, z)
-Body::String
-1 ─     return &amp;quot;nah&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This trick will be expanded on in a future post, but to whet the appetite I will briefly introduce the exact use case that I have. Suppose I have the following structure, where more special algebra types can be added at will by the user:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;abstract type AbstractAlgebraElement{T} end
-struct SpecialAlgebraElement{T&amp;lt;:Real} &amp;lt;: AbstractAlgebraElement{T} end
-struct DifferentAlgebraElement{T&amp;lt;:Number} &amp;lt;: AbstractAlgebraElement{T} end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Objects of the same algebraic type but with different parameters should be compatible (for example, a ring of real numbers represented by &lt;code&gt;Float32&lt;/code&gt; vs one represented by &lt;code&gt;Float64&lt;/code&gt; are essentially the same thing here). As such, we should be able to promote between them so that this should work:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;promote_type(SpecialAlgebraElement{Float64}, SpecialAlgebraElement{Float16}) # -&amp;gt; SpecialAlgebraElement{Float64}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;but this should fail:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-julia&#34;&gt;promote_type(SpecialAlgebraElement{Float64}, DifferentAlgebraElement{Float16})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;As a final note, more idiomatic Julia code, comments, criticisms, etc. are always welcome. Please feel free to email me.&lt;/p&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
+julia&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;@code_warntype&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt; f&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;(x&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;, z&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;)
+Body&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;String&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; ─&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;     &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;h&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This trick will be expanded on in a future post, but to whet the appetite I will briefly introduce the exact use case that I have. Suppose I have the following structure, where more special algebra types can be added at will by the user:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;abstract type&lt;/span&gt; AbstractAlgebraElement&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{T&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#66d9ef&#34;&gt;end&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; SpecialAlgebraElement&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{T&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;Real&lt;/span&gt;} &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; AbstractAlgebraElement&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{T&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#66d9ef&#34;&gt;end&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; DifferentAlgebraElement&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{T&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;Number&lt;/span&gt;} &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; AbstractAlgebraElement&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{T&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;} &lt;span style=&#34;color:#66d9ef&#34;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Objects of the same algebraic type but with different parameters should be compatible (for example, a ring of real numbers represented by &lt;code&gt;Float32&lt;/code&gt; vs one represented by &lt;code&gt;Float64&lt;/code&gt; are essentially the same thing here). As such, we should be able to promote between them so that this should work:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;promote_type&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;(SpecialAlgebraElement&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{&lt;span style=&#34;color:#66d9ef&#34;&gt;Float64&lt;/span&gt;}, SpecialAlgebraElement&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{&lt;span style=&#34;color:#66d9ef&#34;&gt;Float16&lt;/span&gt;}) &lt;span style=&#34;color:#75715e&#34;&gt;# -&amp;gt; SpecialAlgebraElement{Float64}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;but this should fail:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;promote_type&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;(SpecialAlgebraElement&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{&lt;span style=&#34;color:#66d9ef&#34;&gt;Float64&lt;/span&gt;}, DifferentAlgebraElement&lt;span style=&#34;color:#f92672&#34;&gt;&lt;/span&gt;{&lt;span style=&#34;color:#66d9ef&#34;&gt;Float16&lt;/span&gt;})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;As a final note, more idiomatic Julia code, comments, criticisms, etc. are always welcome. Please feel free to email me.&lt;/p&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
 &lt;ol&gt;
-&lt;li id=&#34;fn:1&#34;&gt;Examples of good but not valid Julia code are left as an exercise.
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:2&#34;&gt;&lt;a href=&#34;https://github.com/JuliaLang/julia/issues/2345#issuecomment-54537633&#34; target=&#34;_blank&#34;&gt;https://github.com/JuliaLang/julia/issues/2345#issuecomment-54537633&lt;/a&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Examples of good but not valid Julia code are left as an exercise. &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/JuliaLang/julia/issues/2345#issuecomment-54537633&#34;&gt;https://github.com/JuliaLang/julia/issues/2345#issuecomment-54537633&lt;/a&gt; &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;
+&lt;/section&gt;
 </description>
     </item>
     
