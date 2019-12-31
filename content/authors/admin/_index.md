@@ -24,6 +24,7 @@ interests:
 - Automata and Formal Language Theory
 - Scientific Computing
 - Mathematical Software
+- Korean
 
 education:
   courses:
