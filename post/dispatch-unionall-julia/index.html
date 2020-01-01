@@ -87,6 +87,20 @@ When planning a small library in Julia, I kept running into a similar problem ac
 
   
   
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-155225320-1', 'auto');
+      
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
   
 
   
@@ -107,9 +121,9 @@ When planning a small library in Julia, I kept running into a similar problem ac
   
   <meta property="twitter:card" content="summary">
   
-  <meta property="og:site_name" content="Marco">
+  <meta property="og:site_name" content="Marco Cognetta">
   <meta property="og:url" content="https://mcognetta.github.io/post/dispatch-unionall-julia/">
-  <meta property="og:title" content="Dispatching on types with the same UnionAll (but you don&#39;t know the types beforehand) | Marco">
+  <meta property="og:title" content="Dispatching on types with the same UnionAll (but you don&#39;t know the types beforehand) | Marco Cognetta">
   <meta property="og:description" content="A gist with the code in this post can be found here.
 When planning a small library in Julia, I kept running into a similar problem across all of the type systems that I tried when looking for the proper abstraction. Briefly, I had a single parametric abstract type at the top of an arbitrary type hierarchy (with any number of abstract and concrete types below it, possibly added later by a user) and I needed to write a function that would only work on objects with the same UnionAll1 types within the hierarchy."><meta property="og:image" content="https://mcognetta.github.io/img/icon-192.png">
   <meta property="twitter:image" content="https://mcognetta.github.io/img/icon-192.png"><meta property="og:locale" content="en-us">
@@ -129,7 +143,7 @@ When planning a small library in Julia, I kept running into a similar problem ac
 
 
 
-  <title>Dispatching on types with the same UnionAll (but you don&#39;t know the types beforehand) | Marco</title>
+  <title>Dispatching on types with the same UnionAll (but you don&#39;t know the types beforehand) | Marco Cognetta</title>
 
 </head>
 
@@ -172,7 +186,7 @@ When planning a small library in Julia, I kept running into a similar problem ac
   <div class="container">
 
     
-      <a class="navbar-brand" href="/">Marco</a>
+      <a class="navbar-brand" href="/">Marco Cognetta</a>
       
       <button type="button" class="navbar-toggler" data-toggle="collapse"
               data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
