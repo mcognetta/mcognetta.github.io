@@ -31,6 +31,6 @@ I am (not exhaustively) interested in:
 게시물들은 주로 영어로 쓰려고 합니다만 한국어를 연습하기 위하여 일부 게시물을 한국어로 번역하거나 처음부터 한국어로 쓰려고 합니다.
 
 
-## Recent posts
+## recent posts
 
 {{ recent_posts 5 }}
