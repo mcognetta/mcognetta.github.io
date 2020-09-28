@@ -1,0 +1,80 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/highlight/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_lanyon.css"> <link rel=stylesheet  href="/css/adjust.css"> <link rel=icon  href="/assets/favicon.png"> <title>Dispatching on Types with the Same UnionAll (but You Don’t Know the Type Beforehand)</title> <input type=checkbox  class=sidebar-checkbox  id=sidebar-checkbox > <div class=sidebar  id=sidebar > <div class=sidebar-item > <p>theoretically good with computers</a>.</p> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">home</a> <a class="sidebar-nav-item " href="/posts/">posts</a> <a class="sidebar-nav-item " href="https://dblp1.uni-trier.de/pers/hd/c/Cognetta:Marco">publications</a> <a class="sidebar-nav-item " href="https://github.com/mcognetta">github</a> <a class="sidebar-nav-item " href="https://www.linkedin.com/in/mcognetta/">linkedin</a> <a class="sidebar-nav-item " href="assets/mccv.pdf">cv</a> <a class="sidebar-nav-item " href="/tags">all tags</a> </nav> <div class=sidebar-item > <p>&copy; Marco Cognetta.</p> </div> </div> <!-- Wrap is the content to shift when toggling the sidebar. We wrap the content to avoid any CSS collisions with our real content. --> <div class=wrap > <div class=masthead > <div class=container > <h3 class=masthead-title > <a href="/" title=Home >Marco Cognetta</a> <small>theoretically good with computers</small> </h3> </div> </div> <div class="container content"> <div class=franklin-content ><h1 id=dispatching_on_types_with_the_same_unionall_but_you_dont_know_the_type_beforehand ><a href="#dispatching_on_types_with_the_same_unionall_but_you_dont_know_the_type_beforehand">Dispatching on Types with the Same UnionAll &#40;but You Don’t Know the Type Beforehand&#41;</a></h1> <p>A gist with the code in this post can be found <a href="https://gist.github.com/mcognetta/a468889c2ea53b49d080c6d764f3b6da">here</a>. </p> <p>When planning a small library in Julia, I kept running into a similar problem across all of the type systems that I tried when looking for the proper abstraction. Briefly, I had a single parametric abstract type at the top of an arbitrary type hierarchy &#40;with any number of abstract and concrete types below it, possibly added later by a user&#41; and I needed to write a function that would only work on objects with the same UnionAll<sup id="fnref:1"><a href="#fndef:1" class=fnref >[1]</a></sup> types within the hierarchy. Furthermore, I wanted this to be automatic for all of the types in the hierarchy without the user having to write any code.</p> <p>Here is a basic example. Suppose I have the types:</p> <pre><code class="julia hljs"><span class=hljs-keyword >abstract type</span> A{T} <span class=hljs-keyword >end</span>
+<span class=hljs-keyword >struct</span> B{T} &lt;: A{T} <span class=hljs-keyword >end</span>
+<span class=hljs-keyword >struct</span> C{T} &lt;: A{T} <span class=hljs-keyword >end</span>
+<span class=hljs-keyword >abstract type</span> D{T} &lt;: A{T} <span class=hljs-keyword >end</span>
+<span class=hljs-keyword >struct</span> E{T} &lt;: D{T} <span class=hljs-keyword >end</span>
+<span class=hljs-keyword >struct</span> F{T} &lt;: D{T} <span class=hljs-keyword >end</span></code></pre> <p>Here, <code>D</code>, <code>E</code>, and <code>F</code> are included to demonstrate that the type hierarchy can be arbitrarily complex and extended at any time by the user.</p> <p>I want to define a function <code>f&#40;x, y&#41;</code> that does something when <code>x</code> and <code>y</code> come from the same UnionAll type, even if they are parameterized differently, and fails otherwise. For example:</p> <pre><code class="julia hljs">x = B{<span class=hljs-built_in >Int64</span>}()
+y = B{<span class=hljs-built_in >Float32</span>}()
+z = C{<span class=hljs-built_in >Int64</span>}()
+
+f(x, y) <span class=hljs-comment ># -&gt; does something</span>
+f(x, z) <span class=hljs-comment ># -&gt; fails</span>
+f(y, z) <span class=hljs-comment ># -&gt; fails</span></code></pre> <p>A simple solution to this is to just require the user to implement <code>f</code> for their new types while providing a fall back <code>f&#40;::A, ::A&#41;</code> that fails. However, the library that I am writing has a very natural interface and adding more to it would have been undesirable. Also, this struck me as something that <em>should</em> be possible programmatically.</p> <p>My first attempt to do it programmatically lead to method signatures similar to &#40;the invalid code&#41;:</p> <pre><code class="julia hljs">f(::X, ::Y) <span class=hljs-keyword >where</span> {T, S, U&lt;:A, X&lt;:U{T}, Y&lt;:U{S}} = ...</code></pre>
+<p>I was then pointed &#40;by a JuliaLang member on Slack, though I can&#39;t remember who&#41; to a partial solution of determining if two objects had the same UnionAll type:</p>
+<pre><code class="julia hljs">sameunionall(::X, ::Y) <span class=hljs-keyword >where</span> {X&lt;:A, Y&lt;:A} = !isabstracttype(typejoin(X, Y))</code></pre>
+<p>This can be rewritten for types as:</p>
+<pre><code class="julia hljs">sameunionall(::<span class=hljs-built_in >Type</span>{X}, ::<span class=hljs-built_in >Type</span>{Y}) <span class=hljs-keyword >where</span> {X&lt;:A, Y&lt;:A} = !isabstracttype(typejoin(X, Y))</code></pre>
+<p>Combining this with &#39;Holy-Traits&#39; <sup id="fnref:2"><a href="#fndef:2" class=fnref >[2]</a></sup> via <a href="https://github.com/mauro3/SimpleTraits.jl">SimpleTraits.jl</a> leads to a nice solution:</p>
+<pre><code class="julia hljs"><span class=hljs-keyword >using</span> SimpleTraits
+<span class=hljs-meta >@traitdef</span> SameUnionAll{X, Y}
+<span class=hljs-meta >@traitimpl</span> SameUnionAll{X, Y} &lt;- sameunionall(X, Y)
+<span class=hljs-meta >@traitfn</span> f(::X, ::Y) <span class=hljs-keyword >where</span> {X&lt;:A, Y&lt;:A; SameUnionAll{X, Y}} = <span class=hljs-string >&quot;yo&quot;</span>
+<span class=hljs-meta >@traitfn</span> f(::X, ::Y) <span class=hljs-keyword >where</span> {X&lt;:A, Y&lt;:A; !SameUnionAll{X, Y}} = <span class=hljs-string >&quot;nah&quot;</span></code></pre>
+<p>This can be tested out:</p>
+<pre><code class="julia hljs">x = B{<span class=hljs-built_in >Int64</span>}()
+y = B{<span class=hljs-built_in >Float32</span>}()
+z = C{<span class=hljs-built_in >Int64</span>}()
+f(x, y) <span class=hljs-comment ># -&gt; &quot;yo&quot;</span>
+f(x, z) <span class=hljs-comment ># -&gt; &quot;nah&quot;</span>
+f(y, z) <span class=hljs-comment ># -&gt; &quot;nah&quot;</span>
+
+<span class=hljs-comment ># added later by a user</span>
+<span class=hljs-keyword >struct</span> G{T} &lt;: D{T} <span class=hljs-keyword >end</span>
+f(G{<span class=hljs-built_in >Int16</span>}(), x) <span class=hljs-comment ># -&gt; &quot;nah&quot;</span>
+f(G{<span class=hljs-built_in >Int16</span>}(), G{<span class=hljs-built_in >BigFloat</span>}()) <span class=hljs-comment ># -&gt; &quot;yo&quot;</span></code></pre>
+<p>One important note is that <code>sameunionall</code> is a pure method so <code>f</code> does not fall back to dynamic dispatch. This can be verified by checking:</p>
+<pre><code class="julia hljs">julia&gt; <span class=hljs-meta >@code_warntype</span> f(x, y)
+Body::<span class=hljs-built_in >String</span>
+<span class=hljs-number >1</span> ─     <span class=hljs-keyword >return</span> <span class=hljs-string >&quot;yo&quot;</span>
+
+julia&gt; <span class=hljs-meta >@code_warntype</span> f(x, z)
+Body::<span class=hljs-built_in >String</span>
+<span class=hljs-number >1</span> ─     <span class=hljs-keyword >return</span> <span class=hljs-string >&quot;nah&quot;</span></code></pre>
+<p>This trick will be expanded on in a future post, but to whet the appetite I will briefly introduce the exact use case that I have. Suppose I have the following structure, where more &quot;special algebra&quot; types can be added at will by the user:</p>
+<pre><code class="julia hljs"><span class=hljs-keyword >abstract type</span> AbstractAlgebraElement{T} <span class=hljs-keyword >end</span>
+<span class=hljs-keyword >struct</span> SpecialAlgebraElement{T&lt;:<span class=hljs-built_in >Real</span>} &lt;: AbstractAlgebraElement{T} <span class=hljs-keyword >end</span>
+<span class=hljs-keyword >struct</span> DifferentAlgebraElement{T&lt;:<span class=hljs-built_in >Number</span>} &lt;: AbstractAlgebraElement{T} <span class=hljs-keyword >end</span></code></pre>
+<p>Objects of the same algebraic type but with different parameters should be compatible &#40;for example, a ring of real numbers represented by <code>Float32</code> vs one represented by <code>Float64</code> are essentially the same thing here&#41;. As such, we should be able to promote between them so that this should work:</p>
+<pre><code class="julia hljs">promote_type(SpecialAlgebraElement{<span class=hljs-built_in >Float64</span>}, SpecialAlgebraElement{<span class=hljs-built_in >Float16</span>}) <span class=hljs-comment ># -&gt; SpecialAlgebraElement{Float64}</span></code></pre>
+<p>but this should fail:</p>
+<pre><code class="julia hljs">promote_type(SpecialAlgebraElement{<span class=hljs-built_in >Float64</span>}, DifferentAlgebraElement{<span class=hljs-built_in >Float16</span>})</code></pre>
+<p>As a final note, more idiomatic Julia code, comments, criticisms, etc. are always welcome. Please feel free to email me.</p>
+<p><table class=fndef  id="fndef:1">
+    <tr>
+        <td class=fndef-backref ><a href="#fnref:1">[1]</a>
+        <td class=fndef-content ><a href="https://docs.julialang.org/en/v1/manual/types/index.html#UnionAll-Types-1">https://docs.julialang.org/en/v1/manual/types/index.html#UnionAll-Types-1</a>
+    
+</table>
+<table class=fndef  id="fndef:2">
+    <tr>
+        <td class=fndef-backref ><a href="#fnref:2">[2]</a>
+        <td class=fndef-content ><a href="https://github.com/JuliaLang/julia/issues/2345#issuecomment-54537633">https://github.com/JuliaLang/julia/issues/2345#issuecomment-54537633</a>
+    
+</table>
+</p>
+<div class=page-foot >
+  <div class=copyright >
+    &copy; Marco Cognetta. Last modified: September 28, 2020. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a>.
+  </div>
+</div>
+</div> 
+
+</div>  
+</div> 
+
+
+    
+
+
+
+<label for=sidebar-checkbox  class=sidebar-toggle ></label>
