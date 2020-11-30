@@ -23,7 +23,6 @@ jobs:
         persist-credentials: false
     - name: Install SSH Client
       continue-on-error: true
-      uses: webfactory/ssh-agent@v0.2.0
       with:
         ssh-private-key: ${{ secrets.FRANKLIN_PRIV }}
     # NOTE
@@ -60,5 +59,6 @@ jobs:
         # NOTE
         #   Set this to `BRANCH: gh-pages` for a **project** page and  to
         #   `BRANCH: master` for a **personal** page
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: master
         FOLDER: __site
