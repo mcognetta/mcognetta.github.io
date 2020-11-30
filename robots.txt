@@ -1,0 +1,4 @@
+Sitemap: https://mcognetta.github.io/sitemap.xml
+
+User-agent: *
+Disallow:
