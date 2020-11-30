@@ -2,7 +2,7 @@
 
 ## about me
 
-I am currently a software engineer at Google working on Gboard. I did my Master's in Computer Science at Yonsei University and my undergrad in Discrete Mathematics with a minor in Korean at Georgia Tech.
+I am currently a software engineer at Google working on Gboard. I did my MS in Computer Science at Yonsei University and my BS in Discrete Mathematics with a minor in Korean at Georgia Tech.
 
 I am always open to chatting about interesting topics. Please feel free to send me an email ([lastname].[firstname]@gmail.com).
 
