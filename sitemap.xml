@@ -3,31 +3,37 @@
 
 <url>
     <loc>https://mcognetta.github.io/tags/index.html</loc>
-    <lastmod>2020-11-30</lastmod>
+    <lastmod>2020-12-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
     <loc>https://mcognetta.github.io/posts/rewriting-in-franklin/index.html</loc>
-    <lastmod>2020-11-30</lastmod>
+    <lastmod>2020-12-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
     <loc>https://mcognetta.github.io/posts/dispatch-unionall-julia/index.html</loc>
-    <lastmod>2020-11-30</lastmod>
+    <lastmod>2020-12-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
     <loc>https://mcognetta.github.io/index.html</loc>
-    <lastmod>2020-11-30</lastmod>
+    <lastmod>2020-12-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
     <loc>https://mcognetta.github.io/posts/index.html</loc>
-    <lastmod>2020-11-30</lastmod>
+    <lastmod>2020-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://mcognetta.github.io/posts/recent-posts-list/index.html</loc>
+    <lastmod>2020-12-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
