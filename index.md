@@ -1,5 +1,9 @@
 @def title = "theoretically good with computers"
 
+## recent posts
+
+{{ recent_posts 3 }}
+
 ## about me
 
 I am currently a software engineer at Google working on Gboard. I did my MS in Computer Science at Yonsei University and my BS in Discrete Mathematics with a minor in Korean at Georgia Tech.
@@ -29,8 +33,3 @@ I am (not exhaustively) interested in:
   * 고등학교 수준의 컴퓨터과학교육
 
 게시물들은 주로 영어로 쓰려고 합니다만 한국어를 연습하기 위하여 일부 게시물을 한국어로 번역하거나 처음부터 한국어로 쓰려고 합니다.
-
-
-## recent posts
-
-{{ recent_posts 5 }}

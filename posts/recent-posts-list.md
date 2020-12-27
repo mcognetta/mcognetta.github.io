@@ -49,7 +49,6 @@ function hfun_recent_posts(m::Vector{String})
       fi = "posts/" * splitext(post)[1]
       title = pagevar(fi, :title)
       datestr = pagevar(fi, :date)
-      @assert length(datestr) == 10  "dates must be in mm/dd/yyyy format"
       date = Date(pagevar(fi, :date), df)
       push!(posts, (title=title, link=fi, date=date))
   end
@@ -65,7 +64,7 @@ function hfun_recent_posts(m::Vector{String})
 end
 ```
 
-In my main `index.md` file, this is called as `{{ recent_posts 5 }}` to produce the list. I hope this function comes in handy for others that are using Franklin to implement their websites.
+In my main `index.md` file, this is called as `{{ recent_posts 3 }}` to produce the list. I hope this function comes in handy for others that are using Franklin to implement their websites.
 
 [^1]: [https://franklinjl.org/syntax/utils/#html\_functions\_hfun_](https://franklinjl.org/syntax/utils/#html_functions_hfun_)
 [^2]: [https://franklinjl.org/syntax/page-variables/#basic_settings](https://franklinjl.org/syntax/page-variables/#basic_settings)
