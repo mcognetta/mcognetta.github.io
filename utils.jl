@@ -79,6 +79,10 @@ end
   return "123"
 end
 
+function hfun_reverse_title()
+  return "<i>" * reverse(locvar(:title)) * "</i>"
+end
+
 # function hfun_all_posts()
 #   list = readdir("blog")
 #   filter!(f -> endswith(f, ".md"), list)
