@@ -52,7 +52,6 @@ function hfun_recent_posts(m::Vector{String})
       fi = "posts/" * splitext(post)[1]
       title = pagevar(fi, :title)
       datestr = pagevar(fi, :date)
-      @assert length(datestr) == 10  "dates must be in mm/dd/yyyy format"
       date = Date(pagevar(fi, :date), df)
       push!(posts, (title=title, link=fi, date=date))
   end
