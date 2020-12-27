@@ -67,11 +67,7 @@ function hfun_recent_posts(m::Vector{String})
 end
 ```
 
-In my main `index.md` file, this is called as `{{ recent_posts 3 }}` to produce the following:
+In my main `index.md` file, this is called as `{{ recent_posts 5 }}` to produce the list. I hope this function comes in handy for others that are using Franklin to implement their websites.
 
-{{ recent_posts 3 }}
-
-I hope this function comes in handy for others that are using Franklin to implement their websites.
-
-[^1]: https://franklinjl.org/syntax/utils/#html_functions_hfun_
-[^2]: https://franklinjl.org/syntax/page-variables/#basic_settings
+[^1]: [https://franklinjl.org/syntax/utils/#html\_functions\_hfun_](https://franklinjl.org/syntax/utils/#html_functions_hfun_)
+[^2]: [https://franklinjl.org/syntax/page-variables/#basic_settings](https://franklinjl.org/syntax/page-variables/#basic_settings)
