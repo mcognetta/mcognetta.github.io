@@ -12,7 +12,7 @@ function hfun_reverse_title()
 end
 ```
 
-Rather than writing HTML directly, arbitrary markdown code can be converted to HTML via the `fd2html` function. Further, a string vector can be passed as parameters like so: `{{ func param1 param2 param3 }}`.
+Rather than writing HTML directly, arbitrary markdown code can be converted to HTML via the `fd2html` function. Furthermore, a string vector can be passed as parameters, as in: `{{ func param1 param2 param3 }}`.
 
 In the Franklin docs, the following `hfun` is provided as an example of listing all posts chronologically:
 
