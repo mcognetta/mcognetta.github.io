@@ -183,12 +183,13 @@ html {
 ================================================================== */
 
 .franklin-content img {
-    width: 70%;
-    text-align: center;
-    padding-left: 10%; }
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center; }
 
 .franklin-content .img-small img {
-    width: 50%;
+    width: 90%;
     text-align: center;
     padding-left: 20%; }
 

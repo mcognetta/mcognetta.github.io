@@ -2,7 +2,7 @@
 
 ## recent posts
 
-{{ recent_posts 3 }}
+{{ recent_posts 5 }}
 
 ## about me
 
