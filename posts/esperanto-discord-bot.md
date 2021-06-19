@@ -64,7 +64,7 @@ async def on_message(message):
     await bot.process_commands(message)
 ```
 
-We also have an undo (`!malfaru`) function that deletes the edited message and replaces it with the original (again sent by a webhook). I imposed a cache size limit of 100 messages and implemented it as a plain deque. This is not ideal but can easily be changed in the event that this bot gets serious use.
+There is also an undo (`!malfaru`) function that deletes the edited message and replaces it with the original (again sent by a webhook). I imposed a cache size limit of 100 messages and implemented it as a plain deque. This is not ideal but can easily be changed in the event that this bot gets serious use.
 
 The code can be found at [https://github.com/mcognetta/transskribilo-boto](https://github.com/mcognetta/transskribilo-boto).
 
@@ -72,7 +72,7 @@ The code can be found at [https://github.com/mcognetta/transskribilo-boto](https
 
 In case you were wondering about some of the Esperanto terms that were used, here is a quick summary.
 
-The bot’s name is “transskribilo”, meaning “a tool for transcription”. Undo is called by “malfaru”, the command tense of “to undo”. The opt-in role is “aŭttransskribiĝebla” meaning “able to be automatically transcribed”. The text that appears after the username in transcribed messages is “(transkribita)”, the passive past participle “having been transcribed”. Finally, the reaction text that appears on `!malfaru` commands is “pardonu”, short for “pardonu min”, meaning “pardon me”.
+The bot’s name is “transskribilo”, meaning “a tool for transcription”. The undo command is “malfaru”, the imperative mood of “to undo”. The opt-in role is “aŭttransskribiĝebla” meaning “able to be automatically transcribed”. The text that appears after the username in transcribed messages is “(transkribita)”, the passive past participle “having been transcribed”. Finally, the reaction text that appears on `!malfaru` commands is “pardonu”, short for “pardonu min”, meaning “pardon me”.
 
 Of these, aŭttransskribiĝebla is the most interesting grammatically. It is parsed as aŭt·trans·skrib·iĝ·ebl·a. “Aŭt-“ is the root for aŭto (as in automatically), “trans-“ and “skrib-“ combined give the root for “to transcribe”, “-iĝ-” is a suffix for turning an active verb into the passive voice, “-ebl-” is a suffix for “able to”, and “-a” is the adjective marker suffix.
 
