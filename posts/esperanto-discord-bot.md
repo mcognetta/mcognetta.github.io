@@ -2,7 +2,10 @@
 @def date = "06/19/2021"
 @def tags = ["esperanto", "python", "discord"]
  
+
 # X-System Transcription Discord Bot
+
+The code for this bot can be found at [https://github.com/mcognetta/transskribilo-boto](https://github.com/mcognetta/transskribilo-boto).
 
 In the days before Unicode, typists had to improvise when typing characters with diacritics (ĉ, ŭ, etc.). A popular system for marking diacritics was the “x-system”, where one simply placed an “x” immediately after the character that they wanted to mark with a diacritic (cx -> ĉ, ux -> ŭ, etc.). There are some problems with this system though. For example, there may be more than one viable diacritic for a character in a context or there may be ambiguity between diacritic-marking x’s and literal x’s. However, the x-system took off for Esperanto, which does not have any of the aforementioned issues for pure Esperanto words.
 
@@ -65,8 +68,6 @@ async def on_message(message):
 ```
 
 There is also an undo (`!malfaru`) function that deletes the edited message and replaces it with the original (again sent by a webhook). I imposed a cache size limit of 100 messages and implemented it as a plain deque. This is not ideal but can easily be changed in the event that this bot gets serious use.
-
-The code can be found at [https://github.com/mcognetta/transskribilo-boto](https://github.com/mcognetta/transskribilo-boto).
 
 ## Esperanto
 
