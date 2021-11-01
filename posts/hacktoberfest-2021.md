@@ -220,7 +220,7 @@ julia> Sp.nzval
  0.2668541798981767
 ```
 
-However, structured matrices were just copied directly from their storage, including zeros:
+However, structured matrices are just copied directly from their storage, including zeros:
 
 ```julia-repl
 julia> T = Tridiagonal(zeros(2), rand(3), zeros(2))
@@ -246,7 +246,7 @@ julia> S.nzval
  0.5292893814821844
 ```
 
-The zeros could be dropped (`dropzeros!`) afterwards, but it seems better to just avoid allocating them at all.
+The zeros can be dropped (`dropzeros!`) afterwards, but it seems better to just avoid allocating them at all.
 
 I implemented this only for the `Diagonal` type, to get more comfortable with the `SparseMatrixCSC` [format](https://en.wikipedia.org/wiki/Sparse_matrix#Compressed_sparse_row_(CSR,_CRS_or_Yale_format)) (a post about this is in the draft stage), and to make sure that this was a wanted change before diving in to the other structured matrix types. `Diagonal` has a very amenable structure for quickly constructing a `SparseMatrixCSC` without allocating zeros, as there can be at most one non-zero value in each column, so the column pointers and row values can be easily computed.
 
@@ -260,4 +260,4 @@ An assumption that is being slowly removed from the code base is that structured
 
 One easy way to make the code more generic is to use `zero(T)` instead of a literal `0`  and `iszero` instead of `== 0`.
 
-I found two instances where these could be enacted, one in `findnz` for `SparseMatrixCSC`, and the other in `triu!`/`tril!` for `Diagonal`, `Bidiagonal`, `Tridiagonal`, and `SymTridiagonal`. The first was comparing to a literal `0` and the second was filling the structured matrices with literal `0`. If an `eltype` that either couldn’t be compared to `0` or that couldn’t do `convert(T, 0)` was used in these methods, they would have failed.
+I found two instances where the more generic code could be used, one in `findnz` for `SparseMatrixCSC`, and the other in `triu!`/`tril!` for `Diagonal`, `Bidiagonal`, `Tridiagonal`, and `SymTridiagonal`. The first was comparing to a literal `0` and the second was filling the structured matrices with literal `0`. If an `eltype` that either couldn’t be compared to `0` or that couldn’t do `convert(T, 0)` was used in these methods, they would have failed.
