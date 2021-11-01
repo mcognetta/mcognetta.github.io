@@ -18,7 +18,7 @@ jobs:
         version: 1.5
     - run: julia -e '
             using Pkg; Pkg.add(["NodeJS"]);
-            Pkg.add(Pkg.PackageSpec(name="Franklin", version="0.10.60"));
+            Pkg.add(Pkg.PackageSpec(name="Franklin", rev="master"));
             using NodeJS; run(`$(npm_cmd()) install highlight.js`);
             using Franklin;
             Pkg.activate("."); Pkg.instantiate();
