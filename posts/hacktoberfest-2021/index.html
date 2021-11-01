@@ -1,0 +1,147 @@
+<!doctype html> <html lang=en > <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155225320-2"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-155225320-2'); </script> <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/highlight/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_lanyon.css"> <link rel=stylesheet  href="/css/adjust.css"> <link rel=icon  href="/assets/favicon.ico"> <title>October, or “That Time of the Year When I Think A Lot About Structured Matrices in Julia”</title> <input type=checkbox  class=sidebar-checkbox  id=sidebar-checkbox > <div class=sidebar  id=sidebar > <div class=sidebar-item > <p>theoretically good with computers</a>.</p> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">home</a> <a class="sidebar-nav-item " href="/posts/">posts</a> <a class="sidebar-nav-item " href="https://dblp1.uni-trier.de/pers/hd/c/Cognetta:Marco">publications</a> <a class="sidebar-nav-item " href="https://github.com/mcognetta">github</a> <a class="sidebar-nav-item " href="https://www.linkedin.com/in/mcognetta/">linkedin</a> <a class="sidebar-nav-item " href="assets/mccv.pdf">cv</a> <a class="sidebar-nav-item " href="/tags">all tags</a> </nav> <div class=sidebar-item > <p>&copy; Marco Cognetta.</p> </div> </div> <!-- Wrap is the content to shift when toggling the sidebar. We wrap the content to avoid any CSS collisions with our real content. --> <div class=wrap > <div class=masthead > <div class=container > <h3 class=masthead-title > <a href="/" title=Home >marco cognetta</a> <small>theoretically good with computers</small> </h3> </div> </div> <div class="container content"> <div class=franklin-content ><h1 id=october_or_that_time_of_the_year_when_i_think_a_lot_about_structured_matrices_in_julia ><a href="#october_or_that_time_of_the_year_when_i_think_a_lot_about_structured_matrices_in_julia" class=header-anchor >October, or “That Time of the Year When I Think A Lot About Structured Matrices in Julia”</a></h1> <p>I have participated in <a href="https://hacktoberfest.digitalocean.com/">Hacktoberfest</a> every year since 2016. Nearly every PR I have done for it has been related to Julia, and <a href="https://github.com/JuliaLang/julia/pull/29671">nearly</a> <a href="https://github.com/JuliaLang/julia/pull/29777">all</a> <a href="https://github.com/JuliaLang/julia/pull/29780">of</a> <a href="https://github.com/JuliaLang/julia/pull/37825">those</a> <a href="https://github.com/JuliaLang/julia/pull/37983">have</a> <a href="https://github.com/JuliaLang/julia/pull/42466">been</a> <a href="https://github.com/JuliaLang/julia/pull/42472">related</a> <a href="https://github.com/JuliaLang/julia/pull/42574">to</a> <a href="https://github.com/JuliaLang/julia/pull/42577">structured</a> <a href="https://github.com/JuliaLang/julia/pull/42669">matrices</a> – <a href="https://docs.julialang.org/en/v1/stdlib/LinearAlgebra/#Special-matrices">matrix types</a>, like <code>Diagonal</code> and <code>SymTridiagonal</code>, that succinctly encode sparse matrices with particular <a href="https://en.wikipedia.org/wiki/Band_matrix">band structures</a>. Most operations on these matrix types can be done pretty quickly compared to dense or even just sparse, but unstructured matrices.</p> <p>For example, <code>Tridiagonal</code> matrices are <a href="https://github.com/JuliaLang/julia/blob/ae8452a9e0b973991c30f27beb2201db1b0ea0d3/stdlib/LinearAlgebra/src/tridiag.jl#L470">implemented</a> as just 3 vectors, one of length <code>n</code> and the other two of length <code>n-1</code>, describing the main and off-diagonals, respectively. All other elements in the matrix are zero, so they don&#39;t need to be stored explicitly. When adding a <code>Tridiagonal</code> matrix to another matrix, only these <code>3n-2</code> elements need to be touched, so the sum can be done faster than if nothing was known about the operands.</p> <p>My first <a href="https://github.com/JuliaLang/julia/pull/28883">really big foray</a> into this space was to optimize addition and multiplication when both operands were structured. Many of these methods were too conservative in their return types, returning dense or <code>SparseMatrixCSC</code> &#40;the generic sparse matrix format&#41;, when a more appropriate return type was available, or they used generic fall back methods when fast specalized methods were possible. The findings are summarized in <a href="https://github.com/JuliaLang/julia/pull/28883#issue-353888643">this table</a> describing all of the expected and actual return types. There were a few substantial speedups. For example, multiplying a lower and upper bidiagonal matrix was returning a dense array when a <code>Tridiagonal</code> was always sufficient. Specializing this method and using the correct output type resulted in a ~99&#37; decrease in runtime.</p> <p>I found a few small bugs this year, again related to structured matrices. I even <a href="https://www.youtube.com/watch?v&#61;45SG2N6MMcg">joked</a> to my friend that &quot;In my October, it&#39;s structured matrices. All structured matrices, all the time. No exceptions.&quot; I mostly find these just by playing with randomly constructed structured matrix types and seeing when things are kind of slow or don’t match the output when the same operations are done but using dense representations. Basically, I am just fuzzing the <code>LinearAlgebra</code> standard library by hand.</p> <h3 id=a_hrefhttpsgithubcomjulialangjuliapull424721_an_edge_case_in_symtridiagonal_that_caused_some_methods_to_fail_silently_or_crash_totally_unexpectedly ><a href="#a_hrefhttpsgithubcomjulialangjuliapull424721_an_edge_case_in_symtridiagonal_that_caused_some_methods_to_fail_silently_or_crash_totally_unexpectedly" class=header-anchor ><a href="https://github.com/JuliaLang/julia/pull/42472">&#91;1&#93;</a> An edge case in <code>SymTridiagonal</code> that caused some methods to fail silently &#40;or crash totally unexpectedly&#41;.</a></h3> <p><code>SymTridiagonal</code> has a not-well-documented detail where the off-diagonal &#40;<code>S.ev</code>&#41; can have the same number of elements as the main diagonal &#40;<code>S.dv</code>&#41;. I was told once that this was to aid in some linear algebra solvers, but I can’t find any instances of it being used in the standard library like that to link here. </p> <p>Anyway, this leads to some subtle bugs when there is an extra element, as that element often gets included when broadcasting functions over the off-diagonal:</p> <pre><code class="julia-repl hljs"># ev is the same length as dv
+<span class=hljs-meta >julia&gt;</span><span class=language-julia > dv = rand(<span class=hljs-number >3</span>); ev = zeros(<span class=hljs-number >3</span>)
+</span>
+# Explicitly set the hidden element to 1
+<span class=hljs-meta >julia&gt;</span><span class=language-julia > ev[<span class=hljs-keyword >end</span>] = <span class=hljs-number >1</span>;
+</span>
+# 1 doesn&#x27;t show up in the matrix, but it is stored in S.ev
+<span class=hljs-meta >julia&gt;</span><span class=language-julia > S = SymTridiagonal(dv, ev)
+</span>3×3 SymTridiagonal{Float64, Vector{Float64}}:
+ 0.267635  0.0        ⋅ 
+ 0.0       0.241045  0.0
+  ⋅        0.0       0.348539
+
+# Silently fails on a diagonal matrix
+<span class=hljs-meta >julia&gt;</span><span class=language-julia > isdiag(S)
+</span>false</code></pre> <p>The presence of the extra element can also cause an error to be thrown:</p> <pre><code class="julia-repl hljs"># A 3x3 matrix without the additional off-diagonal element
+<span class=hljs-meta >julia&gt;</span><span class=language-julia > S = SymTridiagonal(rand(<span class=hljs-number >3</span>), rand(<span class=hljs-number >2</span>))
+</span>
+# A 3x3 matrix with the additional off-diagonal element
+<span class=hljs-meta >julia&gt;</span><span class=language-julia > T = SymTridiagonal(rand(<span class=hljs-number >3</span>), rand(<span class=hljs-number >3</span>))
+</span>
+# This should work, but it crashes
+<span class=hljs-meta >julia&gt;</span><span class=language-julia > S + T
+</span>ERROR: DimensionMismatch(&quot;dimensions must match: a has dims (Base.OneTo(2),), b has dims (Base.OneTo(3),), mismatch at 1&quot;)</code></pre> <p>These errors were resolved by replacing instances where broadcasts over <code>S.ev</code> were being done with a broadcast over a view of just the first <code>n-1</code> elements.</p> <p><a href="https://github.com/JuliaLang/julia/issues/42477">A related issue</a>, regarding <code>triu&#33;</code>, <code>tril&#33;</code>, and <code>Tridiagonal&#40;::SymTridiagonal&#41;</code>, was discovered while fixing this issue, but it has not yet been resolved.</p> <h3 id=a_hrefhttpsgithubcomjulialangjuliapull425742_an_edge_case_when_constructing_a_sparsematrixcsc_from_empty_tridiagonal_or_symtridiagonal_matrices ><a href="#a_hrefhttpsgithubcomjulialangjuliapull425742_an_edge_case_when_constructing_a_sparsematrixcsc_from_empty_tridiagonal_or_symtridiagonal_matrices" class=header-anchor ><a href="https://github.com/JuliaLang/julia/pull/42574">&#91;2&#93;</a> An edge case when constructing a <code>SparseMatrixCSC</code> from empty <code>Tridiagonal</code> or <code>SymTridiagonal</code> matrices.</a></h3> <p>This seems to just have been missed by accident, which is easily relatable. The Julia core developers have bigger fish to fry than the obscure case of trying to make an empty sparse matrix from another empty structured matrix.</p> <pre><code class="julia-repl hljs"><span class=hljs-meta >julia&gt;</span><span class=language-julia > sparse(Diagonal(zeros(<span class=hljs-number >0</span>, <span class=hljs-number >0</span>)))
+</span>0×0 SparseMatrixCSC{Float64, Int64} with 0 stored entries
+
+<span class=hljs-meta >julia&gt;</span><span class=language-julia > sparse(Bidiagonal(zeros(<span class=hljs-number >0</span>, <span class=hljs-number >0</span>), :U))
+</span>0×0 SparseMatrixCSC{Float64, Int64} with 0 stored entries
+
+<span class=hljs-meta >julia&gt;</span><span class=language-julia > sparse(Tridiagonal(zeros(<span class=hljs-number >0</span>, <span class=hljs-number >0</span>)))
+</span>ERROR: ArgumentError: invalid Array dimensions
+
+<span class=hljs-meta >julia&gt;</span><span class=language-julia > sparse(SymTridiagonal(zeros(<span class=hljs-number >0</span>, <span class=hljs-number >0</span>)))
+</span>ERROR: ArgumentError: invalid Array dimensions</code></pre> <h3 id=a_hrefhttpsgithubcomjulialangjuliapull424663_inconsistent_validation_of_uplo ><a href="#a_hrefhttpsgithubcomjulialangjuliapull424663_inconsistent_validation_of_uplo" class=header-anchor ><a href="https://github.com/JuliaLang/julia/pull/42466">&#91;3&#93;</a> Inconsistent validation of <code>uplo</code> .</a></h3> <p>There are two flavors of upper/lower structured matrices in Julia: those that have orientation encoded into the type &#40;e.g. <code>UpperTriagular</code> vs <code>LowerTriangular</code>&#41;, and those that have it encoded as an <code>uplo</code> member &#40;e.g. <code>Bidiagonal</code> and <code>Symmetric</code>&#41;. In the latter, <code>:U</code> or <code>‘U’</code> maps to upper and <code>:L</code> or <code>‘L’</code> to lower. However, most orientation checks were just:</p> <pre><code class="julia-repl hljs">if B.uplo == :U
+    ...
+else
+    ...
+end</code></pre> <p>including in the constructor:</p> <pre><code class="julia-repl hljs"><span class=hljs-meta >julia&gt;</span><span class=language-julia > Bidiagonal(rand(<span class=hljs-number >2</span>), rand(<span class=hljs-number >1</span>), <span class=hljs-string >&#x27;U&#x27;</span>)
+</span>2×2 Bidiagonal{Float64,Array{Float64,1}}:
+ 0.792414  0.848267
+  ⋅        0.0463521
+
+<span class=hljs-meta >julia&gt;</span><span class=language-julia > Bidiagonal(rand(<span class=hljs-number >2</span>), rand(<span class=hljs-number >1</span>), <span class=hljs-string >&#x27;X&#x27;</span>)
+</span>2×2 Bidiagonal{Float64,Array{Float64,1}}:
+ 0.916971   ⋅ 
+ 0.0       0.27176
+
+# the uplo::Symbol case is handled properly
+<span class=hljs-meta >julia&gt;</span><span class=language-julia > Bidiagonal(rand(<span class=hljs-number >2</span>), rand(<span class=hljs-number >1</span>), :X)
+</span>ERROR: ArgumentError: uplo argument must be either :U (upper) or :L (lower)</code></pre> <p>This allows for some silent failures. Here is one that I discovered after the PR was merged &#40;the PR fixes this case also, thankfully&#41;:</p> <pre><code class="julia-repl hljs"><span class=hljs-meta >julia&gt;</span><span class=language-julia > x = rand(<span class=hljs-number >3</span>); y = rand(<span class=hljs-number >2</span>)
+</span>2-element Vector{Float64}:
+ 0.22212153279202784
+ 0.5045031681116003
+
+# printing is wrong due to `getindex`
+<span class=hljs-meta >julia&gt;</span><span class=language-julia > b = Bidiagonal(x, y, <span class=hljs-string >&#x27;X&#x27;</span>)
+</span>3×3 Bidiagonal{Float64, Vector{Float64}}:
+ 0.0401843   ⋅         ⋅ 
+ 0.0        0.490734   ⋅ 
+  ⋅         0.0       0.905297
+
+<span class=hljs-meta >julia&gt;</span><span class=language-julia > b[<span class=hljs-number >1</span>, <span class=hljs-number >2</span>]
+</span>0.0
+
+<span class=hljs-meta >julia&gt;</span><span class=language-julia > b.ev[<span class=hljs-number >2</span>]
+</span>0.5045031681116003</code></pre> <p>The above is possible due to <code>getindex</code> having a check for <code>U</code><em>and</em> <code>L</code>:</p> <pre><code class="julia hljs"><span class=hljs-keyword >function</span> getindex(A::Bidiagonal{T}, i::<span class=hljs-built_in >Integer</span>, j::<span class=hljs-built_in >Integer</span>) <span class=hljs-keyword >where</span> T
+    <span class=hljs-keyword >if</span> !((<span class=hljs-number >1</span> &lt;= i &lt;= size(A,<span class=hljs-number >2</span>)) &amp;&amp; (<span class=hljs-number >1</span> &lt;= j &lt;= size(A,<span class=hljs-number >2</span>)))
+        throw(<span class=hljs-built_in >BoundsError</span>(A,(i,j)))
+    <span class=hljs-keyword >end</span>
+    <span class=hljs-keyword >if</span> i == j
+        <span class=hljs-keyword >return</span> A.dv[i]
+    <span class=hljs-keyword >elseif</span> A.uplo == <span class=hljs-string >&#x27;U&#x27;</span> &amp;&amp; (i == j - <span class=hljs-number >1</span>)
+        <span class=hljs-keyword >return</span> A.ev[i]
+    <span class=hljs-keyword >elseif</span> A.uplo == <span class=hljs-string >&#x27;L&#x27;</span> &amp;&amp; (i == j + <span class=hljs-number >1</span>)
+        <span class=hljs-keyword >return</span> A.ev[j]
+    <span class=hljs-keyword >else</span>
+        <span class=hljs-keyword >return</span> zero(T)
+    <span class=hljs-keyword >end</span>
+<span class=hljs-keyword >end</span></code></pre> <p>Since our example fails the first three conditionals &#40;<code>i &#33;&#61; j</code> and <code>X &#33;&#61; U/L</code>&#41;, <code>zero&#40;T&#41;</code> is returned, regardless of what is actually at that index in the matrix.</p> <h3 id=a_hrefhttpsgithubcomjulialangjuliapull4246731_cant_win_em_all_a_rejected_pr_to_add_more_uplo_constructors ><a href="#a_hrefhttpsgithubcomjulialangjuliapull4246731_cant_win_em_all_a_rejected_pr_to_add_more_uplo_constructors" class=header-anchor ><a href="https://github.com/JuliaLang/julia/pull/42467">&#91;3.1&#93;</a> Can’t win ‘em all: a rejected PR to add more <code>uplo</code> constructors.</a></h3> <p>When testing these matrix types, I like to just use the dense matrix constructors like <code>Bidiagonal&#40;::Matrix&#41;</code>, where I can pass in a matrix, and the structured matrix type automatically extracts only the relevant elements. It makes testing quicker, as I don’t need to make the correct sized vectors all the time.</p> <p>For example:</p> <pre><code class="julia-repl hljs"><span class=hljs-meta >julia&gt;</span><span class=language-julia > Tridiagonal(rand(<span class=hljs-number >3</span>, <span class=hljs-number >3</span>))
+</span>3×3 Tridiagonal{Float64, Vector{Float64}}:
+ 0.61729   0.738113   ⋅ 
+ 0.358494  0.997877  0.441913
+  ⋅        0.640765  0.474584</code></pre> <p>It turns out that this worked for <code>uplo</code>-matrices in some cases, but not others:</p> <pre><code class="julia-repl hljs"># uplo::Symbol works for both matrix and vector input cases
+<span class=hljs-meta >julia&gt;</span><span class=language-julia > Bidiagonal(rand(<span class=hljs-number >3</span>, <span class=hljs-number >3</span>), :U)
+</span>3×3 Bidiagonal{Float64,Array{Float64,1}}:
+ 0.971135  0.423251   ⋅ 
+  ⋅        0.528393  0.696667
+  ⋅         ⋅        0.343728
+
+<span class=hljs-meta >julia&gt;</span><span class=language-julia > Bidiagonal(rand(<span class=hljs-number >4</span>), rand(<span class=hljs-number >3</span>), :U)
+</span>4×4 Bidiagonal{Float64, Vector{Float64}}:
+ 0.890622  0.275298   ⋅          ⋅ 
+  ⋅        0.410022  0.861401    ⋅ 
+  ⋅         ⋅        0.0611919  0.255028
+  ⋅         ⋅         ⋅         0.337122
+
+# uplo::Char fails for the matrix input case
+<span class=hljs-meta >julia&gt;</span><span class=language-julia > Bidiagonal(rand(<span class=hljs-number >3</span>, <span class=hljs-number >3</span>), <span class=hljs-string >&#x27;U&#x27;</span>)
+</span>ERROR: MethodError: no method matching Bidiagonal(::Array{Float64,2}, ::Char)
+
+# uplo::Char works for the vector input case
+<span class=hljs-meta >julia&gt;</span><span class=language-julia > Bidiagonal(rand(<span class=hljs-number >4</span>), rand(<span class=hljs-number >3</span>), <span class=hljs-string >&#x27;U&#x27;</span>)
+</span>4×4 Bidiagonal{Float64, Vector{Float64}}:
+ 0.947027  0.983474   ⋅         ⋅ 
+  ⋅        0.563658  0.490839   ⋅ 
+  ⋅         ⋅        0.612506  0.666592
+  ⋅         ⋅         ⋅        0.551945</code></pre> <p>I figured that this was just a missed case, and that the <code>uplo::Char</code> constructors should work wherever the <code>uplo::Symbol</code> constructors worked. Turns out, <a href="https://github.com/JuliaLang/julia/pull/42467#issuecomment-935623412">this was wrong</a>, and the <code>uplo::Char</code> representation is only intended to be used internally, so this PR is an undesired change.</p> <h3 id=a_hrefhttpsgithubcomjulialangjuliapull425774_making_sparsematrixcsc_sparser_when_coming_from_structured_matrices ><a href="#a_hrefhttpsgithubcomjulialangjuliapull425774_making_sparsematrixcsc_sparser_when_coming_from_structured_matrices" class=header-anchor ><a href="https://github.com/JuliaLang/julia/pull/42577">&#91;4&#93;</a> Making <code>SparseMatrixCSC</code> sparser when coming from structured matrices.</a></h3> <p>Generic sparse matrices typically don’t store <code>zero</code> values when being constructed from another matrix. For example:</p> <pre><code class="julia-repl hljs"><span class=hljs-meta >julia&gt;</span><span class=language-julia > S = sprand(<span class=hljs-number >3</span>, <span class=hljs-number >3</span>, <span class=hljs-number >.2</span>)
+</span>3×3 SparseMatrixCSC{Float64, Int64} with 1 stored entry:
+  ⋅         ⋅    ⋅ 
+  ⋅         ⋅    ⋅ 
+ 0.266854   ⋅    ⋅ 
+
+<span class=hljs-meta >julia&gt;</span><span class=language-julia > M = <span class=hljs-built_in >Matrix</span>(s)
+</span>3×3 Matrix{Float64}:
+ 0.0       0.0  0.0
+ 0.0       0.0  0.0
+ 0.266854  0.0  0.0
+
+<span class=hljs-meta >julia&gt;</span><span class=language-julia > Sp = sparse(m)
+</span>3×3 SparseMatrixCSC{Float64, Int64} with 1 stored entry:
+  ⋅         ⋅    ⋅ 
+  ⋅         ⋅    ⋅ 
+ 0.266854   ⋅    ⋅ 
+
+<span class=hljs-meta >julia&gt;</span><span class=language-julia > Sp.nzval
+</span>1-element Vector{Float64}:
+ 0.2668541798981767</code></pre> <p>However, structured matrices were just copied directly from their storage, including zeros:</p> <pre><code class="julia-repl hljs"><span class=hljs-meta >julia&gt;</span><span class=language-julia > T = Tridiagonal(zeros(<span class=hljs-number >2</span>), rand(<span class=hljs-number >3</span>), zeros(<span class=hljs-number >2</span>))
+</span>3×3 Tridiagonal{Float64, Vector{Float64}}:
+ 0.872128  0.0        ⋅ 
+ 0.0       0.714059  0.0
+  ⋅        0.0       0.529289
+
+<span class=hljs-meta >julia&gt;</span><span class=language-julia > S = sparse(T)
+</span>3×3 SparseMatrixCSC{Float64, Int64} with 7 stored entries:
+ 0.872128  0.0        ⋅ 
+ 0.0       0.714059  0.0
+  ⋅        0.0       0.529289
+
+<span class=hljs-meta >julia&gt;</span><span class=language-julia > S.nzval
+</span>7-element Vector{Float64}:
+ 0.8721278130717491
+ 0.0
+ 0.0
+ 0.7140591423154512
+ 0.0
+ 0.0
+ 0.5292893814821844</code></pre> <p>The zeros could be dropped &#40;<code>dropzeros&#33;</code>&#41; afterwards, but it seems better to just avoid allocating them at all.</p> <p>I implemented this only for the <code>Diagonal</code> type, to get more comfortable with the <code>SparseMatrixCSC</code> <a href="https://en.wikipedia.org/wiki/Sparse_matrix#Compressed_sparse_row_&#40;CSR,_CRS_or_Yale_format&#41;">format</a> &#40;a post about this is in the draft stage&#41;, and to make sure that this was a wanted change before diving in to the other structured matrix types. <code>Diagonal</code> has a very amenable structure for quickly constructing a <code>SparseMatrixCSC</code> without allocating zeros, as there can be at most one non-zero value in each column, so the column pointers and row values can be easily computed.</p> <p>On extremely sparse matrices, avoiding the diagonal zeros provided a reasonable speed up, since fewer allocations needed to take place. On medium sparse matrices, there is a regression, likely due to missed branch predictions when guessing if the next element on the diagonal would be zero or not. On very dense diagonals, the performance was about the same as before. So, overall, this seems like a win.</p> <p>There are a few areas that this can be improved. One issue is that the constructor now loops over the diagonal twice, once to count the number of non-zeros and allocate the correct amount of storage in the sparse matrix, and a second time to fill in the correct values. It isn’t clear if this is any better than just looping over the diagonal once and resizing the sparse matrix storage arrays as necessary.</p> <h3 id=a_hrefhttpsgithubcomjulialangjuliapull425495_and_a_hrefhttpsgithubcomjulialangjuliapull426696_zero_0 ><a href="#a_hrefhttpsgithubcomjulialangjuliapull425495_and_a_hrefhttpsgithubcomjulialangjuliapull426696_zero_0" class=header-anchor ><a href="https://github.com/JuliaLang/julia/pull/42549">&#91;5&#93;</a> and <a href="https://github.com/JuliaLang/julia/pull/42669">&#91;6&#93;</a>: <code>zero &#33;&#61; 0</code>.</a></h3> <p>An assumption that is being slowly removed from the code base is that structured and sparse matrix types will always have <code>eltypes</code> that are comparable to a literal <code>0</code>, and which can be constructed by calling <code>convert&#40;T, 0&#41;</code>. <a href="https://github.com/JuliaLang/julia/issues/42536">This isn’t always the case</a>, and <a href="https://github.com/JuliaLang/julia/issues/30573">several</a> <a href="https://discourse.julialang.org/t/is-there-a-defined-minimal-interface-for-a-type-to-work-with-sparsearrays/69602/3">discussions</a> about how to address this have come up. One great thing about Julia is how composable it is, if you use sufficiently generic code. In the linear algebra library, it is likely that someone will want to use a custom numeric type &#40;that doesn’t have the aforementioned properties&#41;, and will expect the code to work as is. When using an unusual “number-like” type, things might fail if there is no valid way to compare directly with <code>0</code>. </p> <p>One easy way to make the code more generic is to use <code>zero&#40;T&#41;</code> instead of a literal <code>0</code> and <code>iszero</code> instead of <code>&#61;&#61; 0</code>.</p> <p>I found two instances where these could be enacted, one in <code>findnz</code> for <code>SparseMatrixCSC</code>, and the other in <code>triu&#33;</code>/<code>tril&#33;</code> for <code>Diagonal</code>, <code>Bidiagonal</code>, <code>Tridiagonal</code>, and <code>SymTridiagonal</code>. The first was comparing to a literal <code>0</code> and the second was filling the structured matrices with literal <code>0</code>. If an <code>eltype</code> that either couldn’t be compared to <code>0</code> or that couldn’t do <code>convert&#40;T, 0&#41;</code> was used in these methods, they would have failed.</p> <div class=page-foot > <div class=copyright > &copy; Marco Cognetta. Last modified: November 01, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a>. </div> </div> </div> </div> </div> <label for=sidebar-checkbox  class=sidebar-toggle ></label>
