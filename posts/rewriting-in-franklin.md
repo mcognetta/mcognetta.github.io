@@ -1,6 +1,8 @@
 @def title = "Rewriting the Site in Franklin.jl"
 @def date = "09/26/2020"
 @def tags = ["meta"]
+
+@def rss_pubdate = Date(2020, 09, 26)
  
 # Rewriting the Site in Franklin.jl
  

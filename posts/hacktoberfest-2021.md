@@ -2,6 +2,9 @@
 @def date = "10/31/2021"
 @def tags = ["julia"]
 
+@def rss_description = "A summary of my 2021 Hacktoberfest Julia contributions."
+@def rss_pubdate = Date(2021, 10, 31)
+
 # October, or “That Time of the Year When I Think A Lot About Structured Matrices in Julia”
 
 I have participated in [Hacktoberfest](https://hacktoberfest.digitalocean.com/) every year since 2016. Nearly every PR I have done for it has been related to Julia, and [nearly](https://github.com/JuliaLang/julia/pull/29671) [all](https://github.com/JuliaLang/julia/pull/29777) [of](https://github.com/JuliaLang/julia/pull/29780) [those](https://github.com/JuliaLang/julia/pull/37825) [have](https://github.com/JuliaLang/julia/pull/37983) [been](https://github.com/JuliaLang/julia/pull/42466) [related](https://github.com/JuliaLang/julia/pull/42472) [to](https://github.com/JuliaLang/julia/pull/42574) [structured](https://github.com/JuliaLang/julia/pull/42577) [matrices](https://github.com/JuliaLang/julia/pull/42669) -- [matrix types](https://docs.julialang.org/en/v1/stdlib/LinearAlgebra/#Special-matrices), like `Diagonal` and `SymTridiagonal`, that succinctly encode sparse matrices with particular [band structures](https://en.wikipedia.org/wiki/Band_matrix). Most operations on these matrix types can be done pretty quickly compared to dense or even just sparse, but unstructured matrices.
