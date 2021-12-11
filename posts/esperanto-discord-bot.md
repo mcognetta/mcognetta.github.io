@@ -2,6 +2,8 @@
 @def date = "06/19/2021"
 @def tags = ["esperanto", "python", "discord"]
  
+@def rss_description = "A Discord bot for automatically transcribing x-system Esperanto into Unicode."
+@def rss_pubdate = Date(2021, 06, 19)
 
 # X-System Transcription Discord Bot
 

@@ -13,6 +13,13 @@ The website_* must be defined for the RSS to work
 
 @def tag_page_path = "tags"
 
+# RSS (the website_{title, descr, url} must be defined to get RSS)
+generate_rss = true
+website_title = "theoretically good with computers"
+website_descr = "marco's posts about computers"
+website_url   = "https://theoreticallygoodwithcomputers.com"
+rss_full_content = true
+
 <!--
 Add here files or directories that should be ignored by Franklin, otherwise
 these files might be copied and, if markdown, processed by Franklin which
