@@ -1,6 +1,9 @@
-@def title = "October, or “That Time of the Year When I Think A Lot About Structured Matrices in Julia”"
+@def title = "October, or 'That Time of the Year When I Think A Lot About Structured Matrices in Julia'"
 @def date = "10/31/2021"
 @def tags = ["julia"]
+
+@def rss_description = "A summary of my 2021 Hacktoberfest Julia contributions."
+@def rss_pubdate = Date(2021, 10, 31)
 
 # October, or “That Time of the Year When I Think A Lot About Structured Matrices in Julia”
 

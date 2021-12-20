@@ -3,6 +3,9 @@
 @def date = "09/01/2019"
 @def hascode = true
 
+@def rss_description = "A post about efficiently dispatching on types that are in the same UnionAll, but are possibly different concrete types (for example, A{T} and A{S}) in Julia."
+@def rss_pubdate = Date(2019, 09, 01)
+
 # Dispatching on Types with the Same UnionAll (but You Don’t Know the Type Beforehand)
 
 A gist with the code in this post can be found [here](https://gist.github.com/mcognetta/a468889c2ea53b49d080c6d764f3b6da). 
