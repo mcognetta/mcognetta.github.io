@@ -66,7 +66,7 @@ function hfun_recent_posts(m::Vector{String})
   return fd2html(markdown, internal=true)
 end
 
-function hfun_all_posts()
+@delay function hfun_all_posts()
   return hfun_recent_posts(["-1"])
 end
 
