@@ -135,14 +135,14 @@
 
 ```python
 if __name__ == '__main__':
+    count = 0
     f = open('input.txt', 'r')
     x, y, z = int(f.readline()), int(f.readline()), int(f.readline())
-    count = 0
+
     for line in f:
-        a = int(f.readline())
-        if a > x: # a > x ==> y + z + a > x + y + z
-            count += 1
-        x, y, z, = y, z, a
+        a = int(line)
+        if a > x: count += 1
+        x, y, z = y, z, a
     print(count)
 ```
 
