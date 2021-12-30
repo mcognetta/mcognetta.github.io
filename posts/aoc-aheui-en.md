@@ -41,15 +41,15 @@ In 아희, the initial consonant determines the instruction. A full list of thes
 
 The directional information is provided by the vowel. As you execute an 아희 program, you traverse the grid with some momentum. When you execute a command, the vowel tells you how to update your momentum, and then you can determine the next cell. Conveniently, the vowel/direction mappings are determined by the shape of the vowel. For example, `ㅏ` means “your new momentum is right with magnitude 1”. Likewise, `ㅜ` would give a downwards momentum with magnitude 1. Vowels like `ㅑ/ㅕ/ㅛ/ㅠ` are the same but with magnitude 2. Other vowels reflect the momentum, and some have no effect. One other key feature is that, if an instruction fails (for example, if the instruction is `add`, but an invalid parameter is passed), the momentum information is reflected (so that `ㅏ` would act as `ㅓ`).
 
-The final consonant acts as a parameter to some instructions, and has no effect on others. Depending on the instruction, the final consonant can act as a pointer to select certain things (mainly data structures), or it can act as some numerical consonant. In the chart of instructions below, the effect of the final consonant is given.
+The final consonant acts as a parameter to some instructions and has no effect on others. Depending on the instruction, the final consonant can act as a pointer to select certain things (mainly data structures), or it can act as some numerical consonant. In the chart of instructions below, the effect of the final consonant is given.
 
-An 아희 program has access to several data structures: 26 stacks, 1 queue, and 1 undefined extension protocol. Each data structure is mapped to one final consonant, so that they can be easily indexed. At any time during the execution of a program, there is one “active” data structure, upon which instructions can act. The `ㅅ` command allows one to select a new active data structure.  
+An 아희 program has access to several data structures: 26 stacks, 1 queue, and 1 undefined extension protocol. Each data structure is mapped to one final consonant so that they can be easily indexed. At any time during the execution of a program, there is one “active” data structure, upon which instructions can act. The `ㅅ` command allows one to select a new active data structure.
 
-아희 programs begin at the top left of the 2-d code grid, and execute continuously until an cell with the instruction `ㅎ` is reached, which immediately terminates the program.
+아희 programs begin at the top left of the 2-d code grid, and execute continuously until a cell with the instruction `ㅎ` is reached, which immediately terminates the program.
 
 #### A Slight Modification to the 아희 Specification
 
-아희 allows for reading from user input (via the `ㅂ`-push instruction with a `ㅇ` or `ㅎ` final-consonant parameter). However, this does not necessarily cover reading from a piped in file (which is required here, as Advent of Code inputs are given as text files). I slightly deviated the specification in my interpreter to make the `ㅂ`-push instruction read from an input file, with the condition that, if a read is performed after the end-of-file had been reached, it would count as a failed instruction (and so the direction information would be reversed, as explained above).
+아희 allows for reading from user input (via the `ㅂ`-push instruction with a `ㅇ` or `ㅎ` final-consonant parameter). However, this does not necessarily cover reading from a piped in file (which is required here, as Advent of Code inputs are given as text files). I slightly deviated from the specification in my interpreter to make the `ㅂ`-push instruction read from an input file, with the condition that, if a read is performed after the end-of-file had been reached, it would count as a failed instruction (and so the direction information would be reversed, as explained above).
 
 ### Advent of Code Day 1 Solution
 
@@ -239,11 +239,11 @@ The main logic is again a loop:
 
 At the start, the active data structure is the `ㄴ`-stack, which holds just the newest number (`x[i]`). The queue holds `[x[i-3], x[i-2], x[i-1]]`. Here, we copy the just-read number and send it to the back of the queue, to prepare for the next iteration. Then, we send the front of the queue (the oldest number in the current set) to the `ㄴ`-stack, so it can be compared with the just-read in number.
 
-In part one, we also had to do a comparison between old and new numbers. The `ㅈ`-compare command, acts as a `≥`, but what this question requires is `>`. It turns out that there aren’t cases of `x[i] == x[i-1]` in the input (at least, in my input), but there are many cases of `x[i] == x[i-3]`. This means that we cannot compare the old and new numbers directly with `ㅈ`, as it would over count (when the triplet sums are equal). To avoid this, we add one to the older number, so that `ㅈ` returns `1` only when the new number is strictly larger (that is, `new ≥ old + 1`).
+In part one, we also had to do a comparison between old and new numbers. The `ㅈ`-compare command acts as a `≥`, but what this question requires is `>`. It turns out that there aren’t cases of `x[i] == x[i-1]` in the input (at least, in my input), but there are many cases of `x[i] == x[i-3]`. This means that we cannot compare the old and new numbers directly with `ㅈ`, as it would over count (when the triplet sums are equal). To avoid this, we add one to the older number, so that `ㅈ` returns `1` only when the new number is strictly larger (that is, `new ≥ old + 1`).
 
 In 아희, there is no way to directly push a `1` into a stack (recall that `ㅂ`-push pushes a value based on the number of lines in the final consonant; since `ㅇ` is already reserved for reading from stdin, there are no available final consonants with only one line). One way to input a one is to push the same value twice and then divide (the `ㄴ` command). This is done with `반/분/너`, which pushes a `2` twice and then divides, leaving `1`. Once the addition and comparison are done, the counter is updated and the loop starts over (so that now, the queue holds `[x[i-2], x[i-1], x[i]]` and the `ㄴ`-stack holds `[x[i+1]]`).
 
-In addition to `ㄴ`-divide, one other new instruction is present in this program, `ㅇ` (seen in the `어` character). This is the "no op" instruction, and it does nothing (but the vowel can still have effect). It is typically used to preserve the layout of the program, or for program flow. Here we use it to preserve the rectangular structure of the loop.
+In addition to `ㄴ`-divide, one other new instruction is present in this program, `ㅇ` (seen in the `어` character). This is the "no op" instruction, and it does nothing (but the vowel can still have an effect). It is typically used to preserve the layout of the program, or for program flow. Here we use it to preserve the rectangular structure of the loop.
 
 Exactly like the first problem, when the end-of-file is reached, the beginning of the loop `방` instruction fails, sending the program to the third section:
 
@@ -254,4 +254,4 @@ Exactly like the first problem, when the end-of-file is reached, the beginning o
 
 which prints the counter value and terminates.
 
-Again, the fourth section: `마르코코그넷허` is my name. Unfortunately, this is not how I typically spell my name. The correct version, `마르코 코그넷*터*` would not fit while preserving the rectangular shape, so I combined the `넷터` and terminating `허` into `넷허`, which has a similar pronounciation.
+Again, the fourth section: `마르코코그넷허` is my name. Unfortunately, this is not how I typically spell my name. The correct version, `마르코 코그넷*터*` would not fit while preserving the rectangular shape, so I combined the `넷터` and terminating `허` into `넷허`, which has a similar pronunciation.
