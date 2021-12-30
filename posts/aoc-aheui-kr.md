@@ -1,6 +1,6 @@
 @def title = "Advent of Code 퍼즐들을 아희로 해결한다"
 @def date = "12/23/2021"
-@def tags = ["aheui", "korean", "python", "아희", "한국어"]
+@def tags = ["aheui", "korean", "manim", "python", "아희", "한국어"]
 
 @def rss_pubdate = Date(2021, 12, 23)
  
