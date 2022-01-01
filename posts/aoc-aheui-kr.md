@@ -5,10 +5,20 @@
 @def rss_pubdate = Date(2021, 12, 23)
  
 # Advent of Code 퍼즐들을 아희로 해결한다
+
+*영어 번역본을 [여기서](https://mcognetta.github.io/posts/aoc-aheui-en/) 읽을 수 있고 [트위터에서도](https://twitter.com/good_in_theory/status/1473938502618431494) 볼 수 있다.*
  
 이번 달 2021년의 [Advent of Code](https://adventofcode.com/) (AoC) 코딩 챌린지가 시작되었다. AoC에서 출제되는 퍼즐들은 재미있고 쉽게 풀 수 있어서 해마다 수많은 사람들이 새로운 프로그래밍언어를 배우거나 이미 사용중인 프로그래밍 언어를 연습하기 위해 참가한다. 
 
-첫날의 퍼즐을 해결하다가 아희 언어로 어떻게 해결할 수 있을지 방법을 떠올리게 되었다. 이 포스트에서는, 먼저 아희에 대해서 소개한 이후에, 나의 해결법에 대해서 설명해 보겠다.
+첫날의 퍼즐을 해결하다가 아희 언어로 어떻게 해결할 수 있을지 방법을 떠올리게 되었다. 또한 [Manim 애니메이션 라이브러리](https://www.manim.community/)로 나의 아희 코드의 실행에 대한 애니메이션을 만들었다!
+
+~~~
+<video controls autoplay muted>
+  <source type="video/mp4" src="/assets/aheui-aoc-post/p1.mp4">
+</video>
+~~~
+
+ 이 포스트에서는, 먼저 아희에 대해서 소개한 이후에, 나의 해결법에 대해서 설명해 보겠다.
 
 아희는 한글로 쓰는 난해한 프로그래밍 언어이다. 아래와 같이, 아희 언어 프로그램들은 한글 낱자를 2차원 배열로 나열한 형태인데, 각 낱자는 컴퓨터 명령을 의미한다. 예시로, 이 프로그램은 “Hello, world!”를 출력한다:
 
@@ -116,7 +126,7 @@
 
 #### 실행함
 ~~~
-<video controls>
+<video controls autoplay muted>
   <source type="video/mp4" src="/assets/aheui-aoc-post/p1.mp4">
 </video>
 ~~~
@@ -124,7 +134,7 @@
 #### 종료됨
 
 ~~~
-<video controls>
+<video controls  autoplay muted>
   <source type="video/mp4" src="/assets/aheui-aoc-post/p1_end.mp4">
 </video>
 ~~~
@@ -181,7 +191,7 @@ if __name__ == '__main__':
 이 애니메이션으로 나의 프로그램이 어떻게 실행하는지 알 수 있다.
 
 ~~~
-<video controls>
+<video controls autoplay muted>
   <source type="video/mp4" src="/assets/aheui-aoc-post/p2.mp4">
 </video>
 ~~~

@@ -6,7 +6,7 @@
 
 # Solving (and Animating) Advent of Code Day 1 with 아희
 
-*The original Korean version of this post can be found [here](https://mcognetta.github.io/posts/aoc-aheui-kr/).*
+*The original Korean version of this post can be found [here](https://mcognetta.github.io/posts/aoc-aheui-kr/), or see it on [Twitter](https://twitter.com/good_in_theory/status/1477073821693886469).*
 
 The [2021 Advent of Code](https://adventofcode.com/) challenge has just ended. Typically, I do the problems in Python or Julia (or, this year, some in Dart), but this time I also solved the first day’s problem using [아희 (Aheui)](https://esolangs.org/wiki/Aheui), a Korean esoteric programming language. On top of this, I hooked up my [아희 interpreter](https://github.com/mcognetta/aheuiPython) to the [Manim animation library](https://www.manim.community/) to generate animations that show the internal state of the 아희 program as it executes!
 
