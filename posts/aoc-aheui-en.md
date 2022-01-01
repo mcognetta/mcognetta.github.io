@@ -72,8 +72,8 @@ if __name__ == '__main__':
 In 아희, I solved it in the following way:
 
 ```
-삼바샇뱡숨방파빠파주
-마르코하멍솧더섬썸퍼
+삼바상뱡숨방파빠파주
+마르코하멍송더섬썸퍼
 ```
 
 There are several instructions used in this program (listed here in Korean alphabetical order):
