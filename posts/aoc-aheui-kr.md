@@ -6,7 +6,7 @@
  
 # Advent of Code 퍼즐들을 아희로 해결한다
 
-*영어 번역본을 [여기서](https://mcognetta.github.io/posts/aoc-aheui-en/) 읽을 수 있고 [트위터에서도](https://twitter.com/good_in_theory/status/1473938502618431494) 볼 수 있다.*
+*영어 번역본을 [여기서](https://mcognetta.github.io/posts/aoc-aheui-en/) 읽을 수 있고 이 포스트를 [트위터에서도](https://twitter.com/good_in_theory/status/1473938502618431494) 볼 수 있다.*
  
 이번 달 2021년의 [Advent of Code](https://adventofcode.com/) (AoC) 코딩 챌린지가 시작되었다. AoC에서 출제되는 퍼즐들은 재미있고 쉽게 풀 수 있어서 해마다 수많은 사람들이 새로운 프로그래밍언어를 배우거나 이미 사용중인 프로그래밍 언어를 연습하기 위해 참가한다. 
 
