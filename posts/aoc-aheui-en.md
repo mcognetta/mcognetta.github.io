@@ -182,7 +182,7 @@ The flow of the program can be understood visually. The first animation covers t
 </video>
 ~~~
 
-The following iteration demonstrates how the program breaks out of the cycle when the end-of-file is reached.
+And this animation demonstrates how the program breaks out of the cycle when the end-of-file is reached.
 
 ~~~
 <video controls autoplay muted>
