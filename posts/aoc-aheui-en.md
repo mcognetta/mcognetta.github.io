@@ -35,7 +35,7 @@ For example, here is a program that outputs `Hello, world!`:
 뽀덩벐멓뻐덕더벅
 ```
 
-Korean characters are made up of three parts, the initial consonant, a vowel, and an (optional) final consonant. For example, `한` is `ㅎ/ㅏ/ㄴ` and `가` is `ㄱ/ㅏ` (with no final consonant). When reading a character, the top or top-left section is the initial consonant. The middle/middle-right/right is the vowel, and the bottom is the final consonant. A visual introduction can be found [here](http://easykorean.edsoftapps.com/learn-structure-of-hangul/).
+Korean characters are made up of three parts: the initial consonant, a vowel, and an (optional) final consonant. For example, `한` is `ㅎ/ㅏ/ㄴ` and `가` is `ㄱ/ㅏ` (with no final consonant). When reading a character, the top or top-left section is the initial consonant. The middle/middle-right/right is the vowel, and the bottom is the final consonant. A visual introduction can be found [here](http://easykorean.edsoftapps.com/learn-structure-of-hangul/).
 
 In 아희, the initial consonant determines the instruction. A full list of these can be found in the specification, but later on I will provide a list of the relevant ones for this post.
 
