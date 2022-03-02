@@ -35,7 +35,7 @@ For example, here is a program that outputs `Hello, world!`:
 뽀덩벐멓뻐덕더벅
 ```
 
-Korean characters are made up of three parts, the initial consonant, a vowel, and an (optional) final consonant. For example, `한` is `ㅎ/ㅏ/ㄴ` and `가` is `ㄱ/ㅏ` (with no final consonant). When reading a character, the top or top-left section is the initial consonant. The middle/middle-right/right is the vowel, and the bottom is the final consonant. A visual introduction can be found [here](http://easykorean.edsoftapps.com/learn-structure-of-hangul/).
+Korean characters are made up of three parts: the initial consonant, a vowel, and an (optional) final consonant. For example, `한` is `ㅎ/ㅏ/ㄴ` and `가` is `ㄱ/ㅏ` (with no final consonant). When reading a character, the top or top-left section is the initial consonant. The middle/middle-right/right is the vowel, and the bottom is the final consonant. A visual introduction can be found [here](http://easykorean.edsoftapps.com/learn-structure-of-hangul/).
 
 In 아희, the initial consonant determines the instruction. A full list of these can be found in the specification, but later on I will provide a list of the relevant ones for this post.
 
@@ -72,8 +72,8 @@ if __name__ == '__main__':
 In 아희, I solved it in the following way:
 
 ```
-삼바샇뱡숨방파빠파주
-마르코하멍솧더섬썸퍼
+삼바상뱡숨방파빠파주
+마르코하멍송더섬썸퍼
 ```
 
 There are several instructions used in this program (listed here in Korean alphabetical order):
@@ -182,7 +182,7 @@ The flow of the program can be understood visually. The first animation covers t
 </video>
 ~~~
 
-The following iteration demonstrates how the program breaks out of the cycle when the end-of-file is reached.
+And this animation demonstrates how the program breaks out of the cycle when the end-of-file is reached.
 
 ~~~
 <video controls autoplay muted>
