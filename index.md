@@ -1,6 +1,6 @@
 @def title = "theoretically good with computers"
 
-## recent posts
+## recent posts ~~~ <small> <a href=../posts>(all posts)</a> </small> ~~~
 
 {{ recent_posts 5 }}
 
