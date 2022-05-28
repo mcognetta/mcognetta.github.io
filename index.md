@@ -4,9 +4,13 @@
 
 {{ recent_posts 5 }}
 
+
+## recent updates
+
+  * (2022-04) I've moved to Tokyo to join the [Okazaki Lab](https://www.nlp.c.titech.ac.jp/) for my PhD. I'll continue working part time at Google Tokyo.
 ## about me
 
-I am currently a software engineer at Google working on Gboard. I did my MS in Computer Science at Yonsei University and my BS in Discrete Mathematics with a minor in Korean at Georgia Tech.
+I am currently a PhD student in NLP in the [Okazaki Lab](https://www.nlp.c.titech.ac.jp/) at Tokyo Institute of Technology, and a PhD Student researcher at Google Tokyo on the Gboard team. Prior to this, I was a software engineer at Google, also on Gboard. I did my MS in Computer Science at Yonsei University and my BS in Discrete Mathematics with a minor in Korean at Georgia Tech.
 
 I am always open to chatting about interesting topics. Please feel free to send me an email ([lastname].[firstname]@gmail.com).
 
