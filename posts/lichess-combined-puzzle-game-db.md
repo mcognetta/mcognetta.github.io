@@ -6,7 +6,7 @@
 
 # Lichess Combined Puzzle-Game Database
 
-*TLDR: A database containing Lichess puzzles joined with their complete game information can be found [here](https://github.com/mcognetta/lichess-combined-puzzle-db). A direct link to download the complete is here: [MEGA link](https://mega.nz/file/ZW8HwTAL#VLC2l2nagO7aQmac6W2WN-V2otJHtxtH4ZMxEqGC2_U).*
+*TLDR: A database containing Lichess puzzles joined with their complete game information can be found [here](https://github.com/mcognetta/lichess-combined-puzzle-db). A direct link to download the complete database is here: [MEGA link](https://mega.nz/file/ZW8HwTAL#VLC2l2nagO7aQmac6W2WN-V2otJHtxtH4ZMxEqGC2_U).*
 
 Recently, I have been wrapping the [Lichess API](https://lichess.org/api) in Julia (there are a few [existing options](https://lichess.org/api#section/Introduction/Clients) in other languages, if you are interested). To test that everything is working well, I wanted to try a few small projects. The first one I am doing is related to the [Puzzle Database](https://database.lichess.org/#puzzles), which contains ~2.9 million puzzles generated from real Lichess games (the repo is [here](https://github.com/ornicar/lichess-puzzler/tree/master/generator), and an interesting article about automatic puzzle generation using Chess.jl can be found [here](https://blog.playmagnus.com/generating-tactical-puzzles-with-stockfish-and-chess-jl-part-i/)).
 
