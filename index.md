@@ -2,6 +2,8 @@
 
 ## recent updates
 
+  * (2022-11) I've joined Mastodon on the [sigmoid.social](https://sigmoid.social/about) instance, which is focused on the ML/AI research community. My profile is [@mc@sigmoid.social](https://sigmoid.social/@mc).
+
   * (2022-04) I've moved to Tokyo to join the [Okazaki Lab](https://www.nlp.c.titech.ac.jp/) for my PhD. I'll continue working part time at Google Tokyo.
 
 ## recent posts ~~~ <small> <a href=../posts>(all posts)</a> </small> ~~~
