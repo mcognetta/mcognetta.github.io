@@ -2,6 +2,8 @@
 
 ## recent updates
 
+  * (2023-07) I presented *LotteryTickets.jl: Sparsify Your Flux Models* at JuliaCon2023. The recording is [here](https://www.youtube.com/watch?v=gyufVG56TEQ&t=2240s) (though this link will change soon), and the slides and repo are [here](https://github.com/mcognetta/LotteryTickets.jl).
+
   * (2023-05) I presented *Parameter-Efficient Korean Character-Level Language Modeling* at EACL2023. The paper can be found [here](https://aclanthology.org/2023.eacl-main.172/).
 
   * (2022-11) I've joined Mastodon on the [sigmoid.social](https://sigmoid.social/about) instance, which is focused on the ML/AI research community. My profile is [@mc@sigmoid.social](https://sigmoid.social/@mc).
