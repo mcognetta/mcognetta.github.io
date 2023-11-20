@@ -14,7 +14,7 @@ A recent LeetCode daily challenge was as follows (slightly simplified for clarit
 
 For example, given a list `["010", "110", "111"]`, a possible solution could be `"001"`. The LeetCode problem has a large test suite (of 183 test cases), with $1 \le k \le 16$, and the exact problem statement can be found [here](https://leetcode.com/problems/find-unique-binary-string/).
 
-I solved this by find a random seed such that *randomly generated bitstrings* solved all the test cases. Here's the code:
+I solved this by finding a random seed such that *randomly generated bitstrings* solved all the test cases. Here's the code:
 
 ```python
 class Solution:
