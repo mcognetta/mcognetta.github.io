@@ -1,10 +1,10 @@
-@def title = "Finding a Random Seed that Solves a LeetCode Problem"
+@def title = "Finding a Random Seed That Solves a LeetCode Problem"
 @def date = "11/20/2023"
 @def tags = ["python", "random"]
 
 @def rss_pubdate = Date(2023, 11, 20)
 
-# Finding a Random Seed that Solves a LeetCode Problem
+# Finding a Random Seed That Solves a LeetCode Problem
 
 A side hobby of mine is solving LeetCode questions in unintended ways -- most often via convoluted one-liners. Such a style of self-imposed constraints make the questions more fun and forces me to think outside of the box for solutions, invoking the feeling of "necessity is the mother of invention".
 
