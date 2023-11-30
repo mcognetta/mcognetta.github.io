@@ -80,7 +80,7 @@ This understanding of the likelihood of randomly solving large test sets is what
 
 ## Implementation
 
-One important aspect of the implementation is that the random seed must depend on the input somehow. The reason is that, for example, if all $6$ length $k=2$ inputs were present in the test suite, then there is no static seed that could possible solve them all simultaneously, as the static seed would produce the same output for any input, and this output must be present in some of the input lists.
+One important aspect of the implementation is that the random seed must depend on the input somehow. The reason is that, for example, if all $6$ length $k=2$ inputs were present in the test suite, then there is no static seed that could possibly solve them all simultaneously, as the static seed would produce the same output for any input, and this output must be present in some of the input lists.
 
 My first attempt to construct a seed from the input was to use Python's builtin `hash` to map the input to a scalar, like `sum(hash(b) for b in bitstrings)`. However, in Python3+, hashing is not deterministic across restarting the interpreter so I had to come up with a different hash function that I knew would be deterministic. Fortunately, the quality of the hash doesn't really matter much in this case, so I chose a simple one that forms a hash by computing a value from each bitstring's characters and their position in the array: `sum(ord(c)*j*i for (i, b) in enumerate(bitstrings) for (j, c) in enumerate(b))`.
 
