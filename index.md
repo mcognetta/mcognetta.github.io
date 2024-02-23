@@ -2,6 +2,8 @@
 
 ## recent updates
 
+  * (2024-02) My paper, Two Counterexamples to *Tokenization and the Noiseless Channel*, was accepted at LREC-COLING 2024. The preprint is [here](https://arxiv.org/abs/2402.14614) and the camera-ready version and code will be available soon.
+
   * (2023-07) I presented *LotteryTickets.jl: Sparsify Your Flux Models* at JuliaCon2023. The recording is [here](https://www.youtube.com/watch?v=ZmcaUyZLi4Q), and the slides and repo are [here](https://github.com/mcognetta/LotteryTickets.jl).
 
   * (2023-05) I presented *Parameter-Efficient Korean Character-Level Language Modeling* at EACL2023. The paper can be found [here](https://aclanthology.org/2023.eacl-main.172/).
