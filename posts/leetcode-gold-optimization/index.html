@@ -1,0 +1,93 @@
+<!doctype html> <html lang=en > <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155225320-2"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-155225320-2'); </script> <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/katex/katex.min.css"> <link rel=stylesheet  href="/libs/highlight/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_lanyon.css"> <link rel=stylesheet  href="/css/adjust.css"> <link rel=icon  href="/assets/noto_bread.png"> <title>Spending Too Much Time Optimizing LeetCode's Path With Maximum Gold</title> <input type=checkbox  class=sidebar-checkbox  id=sidebar-checkbox > <div class=sidebar  id=sidebar > <div class=sidebar-item > <p>theoretically good with computers</a>.</p> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">home</a> <a class="sidebar-nav-item " href="/posts/">posts</a> <a class="sidebar-nav-item " href="https://dblp1.uni-trier.de/pers/hd/c/Cognetta:Marco">publications</a> <a class="sidebar-nav-item " href="https://github.com/mcognetta">github</a> <a class="sidebar-nav-item " href="https://www.linkedin.com/in/mcognetta/">linkedin</a> <a class="sidebar-nav-item " rel=me  href="https://sigmoid.social/@mc">mastodon</a> <a class="sidebar-nav-item " href="https://twitter.com/good_in_theory">twitter</a> <a class="sidebar-nav-item " href="assets/mccv.pdf">cv</a> <a class="sidebar-nav-item " href="/tags">all tags</a> </nav> <div class=sidebar-item > <p>&copy; Marco Cognetta.</p> </div> </div> <!-- Wrap is the content to shift when toggling the sidebar. We wrap the content to avoid any CSS collisions with our real content. --> <div class=wrap > <div class=masthead > <div class=container > <h3 class=masthead-title > <a href="/" title=Home >marco cognetta</a> <small>theoretically good with computers</small> </h3> </div> </div> <div class="container content"> <div class=franklin-content ><h1 id=spending_too_much_time_optimizing_leetcodes_path_with_maximum_gold ><a href="#spending_too_much_time_optimizing_leetcodes_path_with_maximum_gold" class=header-anchor >Spending Too Much Time Optimizing LeetCode&#39;s Path With Maximum Gold</a></h1> <p>Yesterday&#39;s LeetCode daily challenge was a brute-force backtracking problem, <a href="https://leetcode.com/problems/path-with-maximum-gold/">Path With Maximum Gold</a>. To quickly explain, you have a grid &#40;<span class=katex ><span class=katex-mathml ><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>≤</mo><mi>R</mi><mo separator=true >,</mo><mi>C</mi><mo>≤</mo><mn>15</mn></mrow><annotation encoding="application/x-tex">0 \le R, C \le 15</annotation></semantics></math></span><span class=katex-html  aria-hidden=true ><span class=base ><span class=strut  style="height:0.78041em;vertical-align:-0.13597em;"></span><span class=mord >0</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span><span class=mrel >≤</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span></span><span class=base ><span class=strut  style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class=mpunct >,</span><span class=mspace  style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span><span class=mrel >≤</span><span class=mspace  style="margin-right:0.2777777777777778em;"></span></span><span class=base ><span class=strut  style="height:0.64444em;vertical-align:0em;"></span><span class=mord >1</span><span class=mord >5</span></span></span></span>​&#41; with at most 25 cells with a non-zero value denoting their amount of gold. Starting from any cell with gold, you can travel to any adjacent cells with gold &#40;but not to the same cell twice&#41;, and your goal is to collect the maximum amount of gold possible.</p> <p>This is a classic backtracking search problem, where you start at each cell, enumerate all valid paths, and pick the maximal one. The tight constraints of the problem support this approach, as brute forcing is likely to be within the time limits.</p> <p>What I described above is the standard approach, and it does indeed solve the problem with a fairly clean implementation &#40;see: <a href="https://leetcode.com/problems/path-with-maximum-gold/solution/">the official LeetCode solutions</a>&#41;. For reference, the basic LeetCode solution takes somewhere in the 3200-3600ms range to finish &#40;for reference, mine is a ~170ms, a 20x speedup&#41;.</p> <p>This approach leaves a lot of performance on the table though, and I took a break from my <a href="https://mcognetta.github.io/posts/leetcode-random-seed/">normal LeetCode antics</a> to go down the rabbit hole of trying to eke out as much speed as I could from a basic Python implementation.</p> <p>Here is my journey:</p> <p><img src="/assets/leetcode-gold-optimization-post/smush_all_lc.png" alt=smush_all_lc  /></p> <p><img src="/assets/leetcode-gold-optimization-post/100_percentile_lc.png" alt=lc_100  /></p> <p>The main speedups came in the form of several heuristics that I was able to apply based on the different overall approach I took. Rather than brute forcing every viable cell, I took a slightly more structured approach of first finding all connected components of gold cells, <em>then</em> running brute force over each of them. </p> <p>Breaking the graph into connected components unlocks basically all of the optimizations that were necessary to get to sub 400ms. In particular, short circuiting connected component searches.</p> <p>We can short circuit in two ways:</p> <ol> <li><p>If the current connected component&#39;s total gold value is less than the best path we have found so far &#40;in another component&#41;</p> <li><p>If we have found a path in the current connected component that consumes the entire gold value &#40;so no other path in the component can do better&#41;</p> </ol> <p>The first option enables another heuristic: searching connected components in order of their total gold value &#40;under the assumption that higher value connected components will have higher value paths&#41;. In the end, this had negligible effect, but earlier during my optimizations it sped things up quite a bit.</p> <p>The final optimization is a much more subtle one, and was what pushed the code from the 300ms range to sub 250ms &#40;already at the 99.6 percentile&#41;, and then later to the sub 200ms range. The idea is that the only cells that can be at the end of a maximal path are those with 2 or fewer neighbors. The intuition is as follows: suppose we have some cell that has only one neighbor, so it is at the end of a &quot;tail&quot;. There is no reason not to extend the path all the way to connect to that cell, since the value will strictly increase. Now suppose we have a cell with 3 or 4 neighbors. It either exists on a cycle &#40;which must have a cell with 2 neighbors somewhere on it&#41; or at least one of the neighbors is on a tail path &#40;thus there is a cell with degree 1&#41;. Finally, consider a case where there is just a single cycle, so every cell has degree 2. Any cell in the cycle is a suitable starting point. So, if there is a degree 1 cell, we always take that, and if there are degree 3 or 4 cells, we can ignore those and use one of the degree 1 or 2 cells that must exist.</p> <p>Restricting to only cells with degree at most 2 was enough to break the 250 range.</p> <p>To break the 200ms barrier, one more trick was needed. One can extend the degree argument slightly to see that if there is are any degree 1 cells in the component, then at least one of them must be in the maximal path. Then we can search starting from all of the degree one cells first, and pick the maximum of their paths. If none exist, then we just search over all of the degree 2 cells as normal.</p> <p>Overall, the core idea is that so much of this algorithm is dominated by the exhaustive search that any heuristic pruning is worth it.</p> <p>The final code is as follows &#40;with notation for the heuristics&#41;:</p> <pre><code class="python hljs"><span class=hljs-keyword >class</span> <span class="hljs-title class_">Solution</span>:
+    <span class=hljs-keyword >def</span> <span class="hljs-title function_">getMaximumGold</span>(<span class=hljs-params >self, grid: <span class=hljs-type >List</span>[<span class=hljs-type >List</span>[<span class=hljs-built_in >int</span>]]</span>) -&gt; <span class=hljs-built_in >int</span>:
+        R, C = <span class=hljs-built_in >len</span>(grid), <span class=hljs-built_in >len</span>(grid[<span class=hljs-number >0</span>])
+		
+        <span class=hljs-comment ># helper function to get cell neighbors</span>
+        <span class=hljs-keyword >def</span> <span class="hljs-title function_">dirs</span>(<span class=hljs-params >i, j</span>):
+            <span class=hljs-keyword >for</span> (di, dj) <span class=hljs-keyword >in</span> ((<span class=hljs-number >0</span>, <span class=hljs-number >1</span>), (<span class=hljs-number >0</span>, -<span class=hljs-number >1</span>), (<span class=hljs-number >1</span>, <span class=hljs-number >0</span>), (-<span class=hljs-number >1</span>, <span class=hljs-number >0</span>)):
+                n_i = i + di
+                n_j = j + dj
+                <span class=hljs-keyword >if</span> <span class=hljs-number >0</span> &lt;= n_i &lt; R <span class=hljs-keyword >and</span> <span class=hljs-number >0</span> &lt;= n_j &lt; C <span class=hljs-keyword >and</span> grid[n_i][n_j]: 
+                    <span class=hljs-keyword >yield</span> n_i, n_j
+        
+        <span class=hljs-comment ># helper function to get the maximum theoretical value of a</span>
+        <span class=hljs-comment ># connected component</span>
+        <span class=hljs-keyword >def</span> <span class="hljs-title function_">sum_component</span>(<span class=hljs-params >component</span>):
+            <span class=hljs-keyword >return</span> <span class=hljs-built_in >sum</span>(grid[r][c] <span class=hljs-keyword >for</span> (r, c) <span class=hljs-keyword >in</span> component)
+        
+        <span class=hljs-comment ># connected component finder</span>
+        already_in_cc = [[<span class=hljs-literal >False</span> <span class=hljs-keyword >for</span> _ <span class=hljs-keyword >in</span> grid[<span class=hljs-number >0</span>]] <span class=hljs-keyword >for</span> _ <span class=hljs-keyword >in</span> grid]
+        <span class=hljs-keyword >def</span> <span class="hljs-title function_">cc</span>(<span class=hljs-params >r, c</span>):
+            component = [(r, c)]
+            queue = deque([(r, c)], maxlen=<span class=hljs-number >25</span>)
+            already_in_cc[r][c] = <span class=hljs-literal >True</span>
+            
+            <span class=hljs-keyword >while</span> queue:
+                (i, j) = queue.popleft()
+                <span class=hljs-keyword >for</span> (new_i, new_j) <span class=hljs-keyword >in</span> dirs(i, j):
+                    <span class=hljs-keyword >if</span> <span class=hljs-keyword >not</span> already_in_cc[new_i][new_j]:
+                        already_in_cc[new_i][new_j] = <span class=hljs-literal >True</span>
+                        component.append((new_i, new_j))
+                        queue.append((new_i, new_j))
+            <span class=hljs-keyword >return</span> component
+        
+        <span class=hljs-comment ># search over all non-zero cells for new components</span>
+        components = []
+        <span class=hljs-keyword >for</span> r <span class=hljs-keyword >in</span> <span class=hljs-built_in >range</span>(R):
+            <span class=hljs-keyword >for</span> c <span class=hljs-keyword >in</span> <span class=hljs-built_in >range</span>(C):
+                <span class=hljs-keyword >if</span> <span class=hljs-keyword >not</span> already_in_cc[r][c] <span class=hljs-keyword >and</span> grid[r][c]:
+                    components.append(cc(r, c))
+
+        <span class=hljs-comment ># given a component (and a current best score from another component)</span>
+        <span class=hljs-comment ># this searches over all possible paths by exahustive search</span>
+        <span class=hljs-comment ># it applies several heuristics, marked in line</span>
+        <span class=hljs-keyword >def</span> <span class="hljs-title function_">brute_force</span>(<span class=hljs-params >component, cur_best</span>):
+            <span class=hljs-comment ># short circuit in the simple case where there is just a single</span>
+            <span class=hljs-comment ># cell in the component</span>
+            <span class=hljs-keyword >if</span> <span class=hljs-built_in >len</span>(component) == <span class=hljs-number >1</span>: <span class=hljs-keyword >return</span> grid[component[<span class=hljs-number >0</span>][<span class=hljs-number >0</span>]][component[<span class=hljs-number >0</span>][<span class=hljs-number >1</span>]]
+ 
+            <span class=hljs-comment ># short circuit in the case where the maximum theoretical value</span>
+    		<span class=hljs-comment ># for this component is less than a previously found best path</span>
+    		comp_sum = sum_component(component)
+            <span class=hljs-keyword >if</span> comp_sum &lt;= cur_best: <span class=hljs-keyword >return</span> cur_best
+			
+            <span class=hljs-comment ># recursive exhaustive search helper function</span>
+            <span class=hljs-keyword >def</span> <span class="hljs-title function_">recur</span>(<span class=hljs-params >r, c, score</span>):
+                <span class=hljs-comment ># we use a trick here to mark cells as visited during</span>
+                <span class=hljs-comment ># the search. storing the cell value, then setting it</span>
+                <span class=hljs-comment ># to 0 allows us to avoid costly data allocations and</span>
+                <span class=hljs-comment ># sharing during recursion</span>
+                temp = grid[r][c]
+                score += temp
+                grid[r][c] = <span class=hljs-number >0</span>
+                best = score
+                <span class=hljs-keyword >for</span> n_r, n_c <span class=hljs-keyword >in</span> dirs(r, c):
+                    best = <span class=hljs-built_in >max</span>(best, recur(n_r, n_c, score))
+                grid[r][c] = temp
+                <span class=hljs-keyword >return</span> best
+            
+            <span class=hljs-comment ># run the recursive search over valid starting cells (those with)</span>
+            <span class=hljs-comment ># degree 1 or 2</span>
+            best = <span class=hljs-number >0</span>
+            
+            <span class=hljs-comment ># first check if there are any with degree 1, if so, one must appear</span>
+            <span class=hljs-comment ># in the maximal path</span>
+            <span class=hljs-keyword >for</span> (r, c) <span class=hljs-keyword >in</span> [(r, c) <span class=hljs-keyword >for</span> (r, c) <span class=hljs-keyword >in</span> component <span class=hljs-keyword >if</span> <span class=hljs-built_in >len</span>(<span class=hljs-built_in >list</span>(dirs(r, c))) == <span class=hljs-number >1</span>]:
+                best = <span class=hljs-built_in >max</span>(best, recur(r, c, <span class=hljs-number >0</span>))
+                <span class=hljs-keyword >if</span> best == comp_sum: <span class=hljs-keyword >return</span> best
+           	
+            <span class=hljs-comment ># if there weren&#x27;t any, then we search over degree 2 cells as normal</span>
+            <span class=hljs-keyword >if</span> best == <span class=hljs-number >0</span>:
+                <span class=hljs-keyword >for</span> (r, c) <span class=hljs-keyword >in</span> [(r, c) <span class=hljs-keyword >for</span> (r, c) <span class=hljs-keyword >in</span> component <span class=hljs-keyword >if</span> <span class=hljs-built_in >len</span>(<span class=hljs-built_in >list</span>(dirs(r, c))) == <span class=hljs-number >2</span>]:
+                    best = <span class=hljs-built_in >max</span>(best, recur(r, c, <span class=hljs-number >0</span>))
+                    <span class=hljs-keyword >if</span> best == comp_sum: <span class=hljs-keyword >return</span> best
+
+            <span class=hljs-keyword >return</span> best
+        
+        <span class=hljs-comment ># run the brute force search over all components</span>
+        <span class=hljs-comment ># we use a heuristic here to search in order of maximal theoretical</span>
+        <span class=hljs-comment ># value for the component</span>
+        cur_best = <span class=hljs-number >0</span>
+        <span class=hljs-keyword >for</span> c <span class=hljs-keyword >in</span> <span class=hljs-built_in >sorted</span>(components, key = sum_component, reverse=<span class=hljs-literal >True</span>):
+            cur_best = <span class=hljs-built_in >max</span>(cur_best, brute_force(c, cur_best))
+        <span class=hljs-keyword >return</span> cur_best</code></pre> <p>The rest of the performance gains from my chart above were from minor things like reordering some code, reducing some nesting &#40;in particular, I like to nest recursive inner functions&#41;, switching from sets to lists, etc.</p> <p>However, one big jump &#40;from ~700 to ~400ms&#41; was due to me accidentally calling <code>recur</code> twice for each cell. Though, in my defense, I was making that change on my phone.</p> <div class=page-foot > <div class=copyright > &copy; Marco Cognetta. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a>. </div> </div> </div> </div> </div> <label for=sidebar-checkbox  class=sidebar-toggle ></label>
