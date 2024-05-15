@@ -141,4 +141,4 @@ class Solution:
 
 The rest of the performance gains from my chart above were from minor things like reordering some code, reducing some nesting (in particular, I like to nest recursive inner functions), switching from sets to lists, etc.
 
-However, one big jump (from ~700 to ~400ms) was due to me accidentally calling `recur` twice for each cell. Though, in my defense, I was making that change on my phone.
+However, one big jump (from ~700 to ~400ms) was due to me accidentally calling `recur` twice for each cell 🤦🏻‍♂️.
