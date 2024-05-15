@@ -1,6 +1,6 @@
 @def title = "Finding a Random Seed That Solves a LeetCode Problem"
 @def date = "11/20/2023"
-@def tags = ["python", "random"]
+@def tags = ["python", "leetcode", "random"]
 
 @def rss_pubdate = Date(2023, 11, 20)
 
