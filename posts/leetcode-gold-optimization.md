@@ -12,7 +12,7 @@ Yesterday's LeetCode daily challenge was a brute-force backtracking problem, [Pa
 
 This is a classic backtracking search problem, where you start at each cell, enumerate all valid paths, and pick the maximal one. The tight constraints of the problem support this approach, as brute forcing is likely to be within the time limits.
 
-What I described above is the standard approach, and it does indeed solve the problem with a fairly clean implementation (see: [the official LeetCode solutions](https://leetcode.com/problems/path-with-maximum-gold/solution/)). For reference, the basic LeetCode solution takes somewhere in the 3200-3600ms range to finish (for reference, mine is a ~170ms, a 20x speedup).
+What I described above is the standard approach, and it does indeed solve the problem with a fairly clean implementation (see: [the official LeetCode solutions](https://leetcode.com/problems/path-with-maximum-gold/solution/)). For reference, the basic LeetCode solution takes somewhere in the 3200-3600ms range to finish (while mine is about ~170ms, a 20x speedup).
 
 This approach leaves a lot of performance on the table though, and I took a break from my [normal LeetCode antics](https://mcognetta.github.io/posts/leetcode-random-seed/) to go down the rabbit hole of trying to eke out as much speed as I could from a basic Python implementation.
 
