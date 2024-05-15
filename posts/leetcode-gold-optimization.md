@@ -6,6 +6,8 @@
 
 # Spending Too Much Time Optimizing LeetCode's Path With Maximum Gold
 
+**Note**: You can also find my overview [on LeetCode](https://leetcode.com/problems/path-with-maximum-gold/solutions/5158858/simple-heuristics-get-to-100-sub-200-ms-explanation/).
+
 Yesterday's LeetCode daily challenge was a brute-force backtracking problem, [Path With Maximum Gold](https://leetcode.com/problems/path-with-maximum-gold/). To quickly explain, you have a grid ($0 \le R, C \le 15$​) with at most 25 cells with a non-zero value denoting their amount of gold. Starting from any cell with gold, you can travel to any adjacent cells with gold (but not to the same cell twice), and your goal is to collect the maximum amount of gold possible.
 
 This is a classic backtracking search problem, where you start at each cell, enumerate all valid paths, and pick the maximal one. The tight constraints of the problem support this approach, as brute forcing is likely to be within the time limits.
