@@ -32,7 +32,7 @@ I am (not exhaustively) interested in:
 
 ## 자기소개
 
-저는 도쿄공업대학(Tokyo Institute of Technology)의 [Okazaki 연구실](https://www.nlp.c.titech.ac.jp/)의 박사하정 학생하고 구글 지보드(Gboard)팀의 개발자 마르코입니다. 조지아텍에서 이산수학을 전공, 한국어를 부전공하였고 이후에 연세대학교의 [계산이론 연구실](https://toc.yonsei.ac.kr/)에서 컴퓨터 과학 석사학위를 수료하였습니다.
+저는 도쿄공업대학(Tokyo Institute of Technology)의 [Okazaki 연구실](https://www.nlp.c.titech.ac.jp/)의 박사하정 학생이고 구글 지보드(Gboard)팀의 개발자 마르코입니다. 조지아텍에서 이산수학을 전공, 한국어를 부전공하였고 이후에 연세대학교의 [계산이론 연구실](https://toc.yonsei.ac.kr/)에서 컴퓨터 과학 석사학위를 완료하였습니다.
 
 흥미로운 주제가 있다면, 언제든 누구와도 이야기 나누고 싶습니다. 이메일로 연락해주세요 ([성].[이름]@gmail.com).
 
