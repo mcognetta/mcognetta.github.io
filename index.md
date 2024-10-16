@@ -2,7 +2,12 @@
 
 ## recent updates
 
+  * (2024-09) My team (myself, [Tyler Woodruff](https://www.tyle.rw/), and [Oleg Filatov](https://www.linkedin.com/in/oleg-filatov-63a51a85/)), Team ~~~<span style="font-family: 'Noto Emoji';">🍞</span>~~~, won the [IEEE BigData Cup: Predicting Chess Puzzle Difficulty Challenge](https://knowledgepit.ai/predicting-chess-puzzle-difficulty/). The camera-ready paper and code will be available soon, and will be presented at IEEE BigData.
+
+  * (2024-09) My paper, *Distributional Properties of Subword Regularization* (with Vilém Zouhar and Naoaki Okazaki) was accepted to EMNLP. The preprint is [here](https://arxiv.org/abs/2408.11443) and the camera-ready version will be available soon.
+
   * (2024-02) My paper, Two Counterexamples to *Tokenization and the Noiseless Channel*, was accepted at LREC-COLING 2024. The preprint is [here](https://arxiv.org/abs/2402.14614) and the camera-ready version and code will be available soon.
+    * The camera-ready version is [here](https://aclanthology.org/2024.lrec-main.1469/) and the code is [here](https://github.com/mcognetta/TokenizationNoiselessCounterexamples).
 
   * (2023-07) I presented *LotteryTickets.jl: Sparsify Your Flux Models* at JuliaCon2023. The recording is [here](https://www.youtube.com/watch?v=ZmcaUyZLi4Q), and the slides and repo are [here](https://github.com/mcognetta/LotteryTickets.jl).
 
