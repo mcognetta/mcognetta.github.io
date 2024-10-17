@@ -2,7 +2,7 @@
 
 ## recent updates
 
-  * (2024-09) My team (myself, [Tyler Woodruff](https://www.tyle.rw/), and [Oleg Filatov](https://www.linkedin.com/in/oleg-filatov-63a51a85/)), Team ~~~<span style="font-family: 'Noto Emoji';">🍞</span>~~~, won the [IEEE BigData Cup: Predicting Chess Puzzle Difficulty Challenge](https://knowledgepit.ai/predicting-chess-puzzle-difficulty/). The camera-ready paper and code will be available soon, and will be presented at IEEE BigData.
+  * (2024-09) My team (myself, [Tyler Woodruff](https://www.tyle.rw/), and [Oleg Filatov](https://www.linkedin.com/in/oleg-filatov-63a51a85/)), Team ~~~<span style="font-family: 'Noto Emoji';">🍞</span>~~~, won the [IEEE BigData Cup: Predicting Chess Puzzle Difficulty Challenge](https://knowledgepit.ai/predicting-chess-puzzle-difficulty/). The camera-ready paper and code will be available soon and will be presented at IEEE BigData.
 
   * (2024-09) My paper, *Distributional Properties of Subword Regularization* (with Vilém Zouhar and Naoaki Okazaki) was accepted to EMNLP. The preprint is [here](https://arxiv.org/abs/2408.11443) and the camera-ready version will be available soon.
 
