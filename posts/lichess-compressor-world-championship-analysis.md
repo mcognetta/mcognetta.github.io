@@ -46,7 +46,7 @@ In particular, the Lichess compressor noted one massive blunder by Ding: 18. ...
 
 ![the blunder 18. .. Nb2??](/assets/lichess-compressor-championship-post/nb2.png)
 
-From an entropy standpoint we see a clear difference in play. The Lichess compressor uses an average of ~4.4 bits per move for encoding. Gukesh and Ding required an average of 4.98 and 5.21 bits, respectively, indicating that they deviated significantly from established thought.
+From an entropy standpoint, we see a clear difference in play. The Lichess compressor uses an average of ~4.4 bits per move for encoding. Gukesh and Ding required an average of 4.98 and 5.21 bits, respectively, indicating that they deviated significantly from established thought.
 
 
 
@@ -61,4 +61,4 @@ On an unrelated note, I once made a Lichess bot that used the compression functi
 
 # Appendix
 
-If you are interested in producing your own graphs like the ones in this article, here is a [colab](https://colab.research.google.com/drive/1H9cw_o-e3aLgKpwcfzzI3P4l8tkgkhPR?usp=sharing) that can convert a PGN input or a Lichess game into a graph.
+If you are interested in producing your own graphs like the ones in this article, here is a [Colab](https://colab.research.google.com/drive/1H9cw_o-e3aLgKpwcfzzI3P4l8tkgkhPR?usp=sharing) that can convert a PGN input or a Lichess game into a graph.
