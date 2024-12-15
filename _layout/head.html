@@ -17,6 +17,11 @@
   {{if hascode}} {{insert head_highlight.html }}   {{end}}
   {{insert style.html}}
   {{isdef title}} <title>{{fill title}}</title>  {{end}}
+  
+  {{isdef title}}   <meta property="og:title" content="{{fill title}}" /> {{end}}
+  {{isdef rss_description}} <meta property="og:description" content="{{fill rss_description}}" /> {{end}}
+  {{isdef image}} <meta property="og:image" content={{fill image}}> {{end}}
+
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Emoji&display=swap">
 </head>
 <body>
