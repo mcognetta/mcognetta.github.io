@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:media="http://search.yahoo.com/mrss/"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:georss="http://www.georss.org/georss">
+
+  <channel>
+    <title>
+      <![CDATA[  theoretically good with computers  ]]>
+    </title>
+    <link> https://mcognetta.github.io/ </link>
+    <description>
+      <![CDATA[  i wish i was actually good with computers  ]]>
+    </description>
+    <atom:link
+      href="https://mcognetta.github.io/feed.xml"
+      rel="self"
+      type="application/rss+xml" />
+
+
+<item>
+  <title>
+    <![CDATA[  The Lichess Game Compressor&#39;s Analysis of Game 1 of the World Championships  ]]>
+  </title>
+  <link> https://mcognetta.github.io/posts/lichess-compressor-world-championship-analysis/index.html </link>
+  <guid> https://mcognetta.github.io/posts/lichess-compressor-world-championship-analysis/index.html </guid>
+  <description>
+    <![CDATA[  The 2024 Chess World Championships are in the books. The scores, grandmaster commentary, and Stockfish evaluations tell most of the story, but isn&#39;t there someone you forgot to ask?  ]]>
+  </description>  
+    
+  <pubDate>Fri, 13 Dec 2024 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Marco Cognetta</atom:name>
+  </atom:author>
+        
+</item>
+</channel></rss>
