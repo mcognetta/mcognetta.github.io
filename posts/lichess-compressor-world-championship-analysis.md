@@ -62,3 +62,5 @@ On an unrelated note, I once made a Lichess bot that used the compression functi
 # Appendix
 
 If you are interested in producing your own graphs like the ones in this article, here is a [Colab](https://colab.research.google.com/drive/1H9cw_o-e3aLgKpwcfzzI3P4l8tkgkhPR?usp=sharing) that can convert a PGN input or a Lichess game into a graph.
+
+If you are interested in running the Lichess compressor bot (a Lichess bot that uses the compression scorer as an evaluation function), a repo and instructions are given [here](https://lichess.org/forum/community-blog-discussions/ublog-X0afKqm2?page=2#14).
