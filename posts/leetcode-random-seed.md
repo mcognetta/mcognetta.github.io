@@ -6,7 +6,7 @@
 
 # Finding a Random Seed That Solves a LeetCode Problem
 
-**Discuss this on Bluesky**: [thread link](https://bsky.app/profile/mcognetta.bsky.social/post/3liliuxdu5c26)
+**Discuss this on other sites**: [Bluesky](https://bsky.app/profile/mcognetta.bsky.social/post/3liliuxdu5c26), [Hacker News](https://news.ycombinator.com/item?id=41080485)
 
 **UPDATE (2025-02-20)**: This problem was selected again as today's Leetcode problem of the day. However, it seems that Leetcode slightly updated the test suite, so the original solution no longer works. Not to be outdone, I used a simpler method for generating the seeds and found a new random solution that works. Try it out! I added an explanation at the bottom, but you should read the full post for the main idea.
 
