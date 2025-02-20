@@ -6,6 +6,17 @@
 
 # Finding a Random Seed That Solves a LeetCode Problem
 
+**UPDATE (2025-02-20)**: This problem was selected again as today's Leetcode problem of the day. However, it seems that Leetcode slightly updated the test suite, so the original solution no longer works. Not to be outdone, I used a simpler method for generating the seeds and found a new random solution that works. Try it out! I added an explanation at the bottom, but you should read the full post for the main idea.
+
+```python
+class Solution:
+    def findDifferentBinaryString(self, nums: List[str]) -> str:
+        random.seed(''.join(sorted(nums)) + str(33257492))
+        return ''.join(random.choice('01') for _ in nums)
+```
+
+-------------
+
 A side hobby of mine is solving LeetCode questions in unintended ways -- most often via convoluted one-liners. Such a style of self-imposed constraints make the questions more fun and forces me to think outside of the box for solutions, invoking the feeling of "necessity is the mother of invention".
 
 A recent LeetCode daily challenge was as follows (slightly simplified for clarity):
@@ -111,3 +122,44 @@ for i in range(100_000_000):
 When I had a collection of good seeds, I tested them on LeetCode and, if one failed, I added the failing test to my test suite and resumed my search. I eventually found the additive factor that allowed me to pass all the tests. In total, it took 42 tries for me to get the correct seed once I had nailed down the hash function structure.
 
 I think this search could have been sped up in several ways. The main way is that I am pretty sure that there were some duplicates in the test suite, but with their order permuted (e.g., `["00", "11"]` vs `["11", "00"]`). These inputs would hash to different values for the seed, meaning they made the problem a bit harder (especially if they were small $k$). Sorting them before applying the hash would have resolved this issue. I also think a better hash function could have been used. For example, Python's seed can apparently take in a string, so it would have been possible for me to simply seed the hash function with the concatenation of all of the bitstrings. I think this is the biggest area that could have prevented me from solving the problem, since we expected only ~30 valid seeds in the interval that I used in the hash function, any hash collisions could have easily made it so that we would not find any valid seeds unless we increased the modulus.
+
+## Updated Solution (2025-02-20)
+
+Since Leetcode updated the test suite, my original solution no longer works. But, I found a new seed that works just as well. Instead of making a custom hashing function (like `((seed_value + sum(ord(c)*(i*j+111) for (i, n) in enumerate(nums) for (j, c) in enumerate(n))) % 999999999)`), we just use the fact that Python can accept a _string_ as a random seed value. Then, we search for salt values (that is, short strings that we append to the string for the seed value) to find an appropriate seeding function.
+
+I also implemented one of the ideas discussed above, where we first sort the bitstring list to avoid having to find seeds that work on permutations of the same input (i.e., `[00, 11]` vs `[11, 00]` should both be solved by the same seed). This helps cut down the search space a lot.
+
+Here is the working solution:
+
+```python
+
+class Solution:
+    def findDifferentBinaryString(self, nums: List[str]) -> str:
+        random.seed(''.join(sorted(nums)) + str(33257492))
+        return ''.join(random.choice('01') for _ in nums)
+
+```
+
+And here is how I mined the seeds:
+
+```python
+import random
+
+# fill this in as we uncover new partial solutions
+test_suite = []
+
+def find_new_string(bitstrings, seed_value):
+    random.seed(''.join(sorted(bitstrings)) + str(seed_value))
+    return ''.join(random.choice('01') for _ in bitstrings)
+
+
+
+good_seeds = []
+for i in range(100_000_000):
+    if i % 100000 == 0: print(i)
+    if all(find_new_string(bitstrings, i) not in bitstrings for bitstrings in test_suite): 
+        print(f"FOUND ONE: {i}")
+        good_seeds.append(i)
+```
+
+![It works!](/assets/lichess-random-seed-post/accepted_screenshot.png)
