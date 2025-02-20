@@ -15,6 +15,8 @@ class Solution:
         return ''.join(random.choice('01') for _ in nums)
 ```
 
+![It works!](/assets/lichess-random-seed-post/accepted_screenshot.png)
+
 -------------
 
 A side hobby of mine is solving LeetCode questions in unintended ways -- most often via convoluted one-liners. Such a style of self-imposed constraints make the questions more fun and forces me to think outside of the box for solutions, invoking the feeling of "necessity is the mother of invention".
@@ -161,5 +163,3 @@ for i in range(100_000_000):
         print(f"FOUND ONE: {i}")
         good_seeds.append(i)
 ```
-
-![It works!](/assets/lichess-random-seed-post/accepted_screenshot.png)
