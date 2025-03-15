@@ -2,7 +2,7 @@
 
 ## recent updates
 
-  * (2025-03) *Jamo-Level Subword Tokenization in Low-Resource Korean Machine Translation* was accepted to LoResMT @ NAACL. This was lead by Junyoung Lee and myself along with Sangwhan Moon and Naoaki Okazaki. The camera-ready paper and code will be available soon.
+  * (2025-03) *Jamo-Level Subword Tokenization in Low-Resource Korean Machine Translation* was accepted to LoResMT @ NAACL. This was led by Junyoung Lee and myself along with Sangwhan Moon and Naoaki Okazaki. The camera-ready paper and code will be available soon.
 
   * (2024-10) I'm on Bluesky [@mcognetta.bsky.social](https://bsky.app/profile/mcognetta.bsky.social).
 
