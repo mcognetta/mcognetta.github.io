@@ -2,6 +2,8 @@
 
 ## recent updates
 
+  * (2025-03) *Jamo-Level Subword Tokenization in Low-Resource Korean Machine Translation* was accepted to LoResMT @ NAACL. This was lead by Junyoung Lee and myself along with Sangwhan Moon and Naoaki Okazaki. The camera-ready paper and code will be available soon.
+
   * (2024-10) I'm on Bluesky [@mcognetta.bsky.social](https://bsky.app/profile/mcognetta.bsky.social).
 
   * (2024-09) Team ~~~<span style="font-family: 'Noto Emoji';">🍞</span>~~~ ([Tyler Woodruff](https://www.tyle.rw/), [Oleg Filatov](https://www.linkedin.com/in/oleg-filatov-63a51a85/), and myself) won the [IEEE BigData Cup: Predicting Chess Puzzle Difficulty Challenge](https://knowledgepit.ai/predicting-chess-puzzle-difficulty/). The camera-ready paper and code will be available soon, and will be presented at IEEE BigData.
