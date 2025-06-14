@@ -17,7 +17,7 @@ jobs:
       with:
         version: 1.5
     - run: julia -e '
-            using Pkg; Pkg.add(["NodeJS"]);
+            using Pkg; Pkg.add(["NodeJS", "LiveServer"]);
             Pkg.add(Pkg.PackageSpec(name="Franklin", rev="master"));
             using NodeJS; run(`$(npm_cmd()) install highlight.js`);
             using Franklin;
