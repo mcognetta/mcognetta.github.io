@@ -15,9 +15,9 @@ jobs:
     - name: Install Julia
       uses: julia-actions/setup-julia@v1
       with:
-        version: 1.5
+        version: 1.11
     - run: julia -e '
-            using Pkg; Pkg.add(["NodeJS", "LiveServer"]);
+            using Pkg; Pkg.add(["NodeJS"]);
             Pkg.add(Pkg.PackageSpec(name="Franklin", rev="master"));
             using NodeJS; run(`$(npm_cmd()) install highlight.js`);
             using Franklin;
