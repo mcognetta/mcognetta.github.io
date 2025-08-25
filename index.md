@@ -1,6 +1,14 @@
 @def title = "theoretically good with computers"
 
 ## recent updates
+
+  * (2025-08) *Tokenization as Finite-State Transduction* was accepted to Computational Linguistics.
+    * A preprint is available [here](https://arxiv.org/abs/2410.15696) but it is a bit out of date. The updated preprint and code will be available soon.
+  
+  * (2025-08) I gave an invited tutorial at [DLT2025](https://cida.uos.ac.kr/dlt2025/) on Subword Tokenization and Formal Language Theory. The slides and reading list can be found [here](https://github.com/mcognetta/subword_tokenization_meets_formal_language_theory).
+
+  * (2025-08) Team ~~~<span style="font-family: 'Noto Emoji';">🍞</span>~~~ strikes again. We placed 2nd in the [2025 FedCSIS Chess Puzzle Prediction Challenge](https://knowledgepit.ai/predicting-chess-puzzle-difficulty-2/). The code and paper will be available soon.
+
   * (2025-06) *Pitfalls, Subtleties, and Techniques in Automata-Based Subword-Level Constrained Generation* was accepted at [TokShop @ ICML](https://tokenization-workshop.github.io/). This was joint work with David Pohl, Junyoung Lee, and Naoaki Okazaki. The camera-ready paper and code will be available soon.
 
   * (2025-03) *Jamo-Level Subword Tokenization in Low-Resource Korean Machine Translation* was accepted to [LoResMT @ NAACL](https://www.loresmt.org/). This was led by Junyoung Lee and myself along with Sangwhan Moon and Naoaki Okazaki. The camera-ready paper is [here](https://github.com/mcognetta/jamo-bpe-loresmt) and the code is [here](https://github.com/mcognetta/jamo-bpe-loresmt). 
