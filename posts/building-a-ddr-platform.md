@@ -7,6 +7,8 @@
 
 # Building a DDR Platform
 
+*I also posted this on [bsky](https://bsky.app/profile/mcognetta.bsky.social/post/3lxfkcc2m222f).*
+
 I got into rhythm games during grad school in Korea, since one of my labmates was super into them and our lab was close to a nice arcade. I mainly played Jubeat, but towards the end of my time in Korea, I started playing DDR. This really picked up when I joined Google, since there was a well-maintained machine and an active community. I ended up playing basically every day while I was there.
 
 When COVID hit, I moved back to my parents' house in Florida and decided to "decorate" my "office" with my two favorite perks from work: an espresso machine and a DDR machine. 
