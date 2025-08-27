@@ -50,6 +50,12 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://mcognetta.github.io/posts/building-a-ddr-platform/index.html</loc>
+    <lastmod>2025-08-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://mcognetta.github.io/posts/lichess-compressor-world-championship-analysis/index.html</loc>
     <lastmod>2025-08-27</lastmod>
     <changefreq>monthly</changefreq>

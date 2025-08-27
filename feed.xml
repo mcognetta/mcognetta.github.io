@@ -23,6 +23,25 @@
 
 <item>
   <title>
+    <![CDATA[  Building a DDR Platform  ]]>
+  </title>
+  <link> https://mcognetta.github.io/posts/building-a-ddr-platform/index.html </link>
+  <guid> https://mcognetta.github.io/posts/building-a-ddr-platform/index.html </guid>
+  <description>
+    <![CDATA[  I built a simple wooden platform for my DDR pad during COVID.  ]]>
+  </description>  
+    
+  <pubDate>Thu, 28 Aug 2025 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Marco Cognetta</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
     <![CDATA[  The Lichess Game Compressor&#39;s Analysis of Game 1 of the World Championships  ]]>
   </title>
   <link> https://mcognetta.github.io/posts/lichess-compressor-world-championship-analysis/index.html </link>
