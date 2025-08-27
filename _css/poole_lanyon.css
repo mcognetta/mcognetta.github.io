@@ -61,7 +61,7 @@
   body {
     color: #343434;
     font-family: Avenir, 'Nanum Gothic';
-    font-size: 16px;
+    font-size: 18px;
     background-color: #fff;
     -webkit-text-size-adjust: 100%;
         -ms-text-size-adjust: 100%;
@@ -298,7 +298,7 @@
   }
   @media (min-width: 56rem) {
     .container {
-      max-width: 38rem;
+      max-width: 45rem;
     }
   }
   
