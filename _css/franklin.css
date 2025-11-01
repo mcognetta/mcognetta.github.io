@@ -161,7 +161,9 @@ html {
 
 .franklin-content table.fndef  {
     margin: 0;
-    margin-bottom: 10px;}
+    margin-bottom: 10px;
+    width: 100%}
+
 .franklin-content .fndef tr, td {
     padding: 0;
     border: 0;
