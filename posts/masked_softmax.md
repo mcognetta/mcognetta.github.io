@@ -35,11 +35,11 @@ mask = torch.rand(5) < 0.6            # -> [True, False,  True,  True, False]
 
 How can we compute the masked out probability, which should be $[0.7210, 0.0, 0.1083, 0.1707, 0.0]$ in our example? The first class probability is found via:
 $$
-\frac{e^{1.2355}}{e^{1.2355} + e^{-0.6606} + e^{-0.2050}} = 0.721
+\frac{e^{1.2355}}{e^{1.2355} + e^{-0.6606} + e^{-0.2050}} = 0.721,
 $$
+and the rest are calcuated similarly.
 
-
-I recently came across an example that tried to compute what we wanted like:
+However, I recently came across an example that tried to compute what we wanted like:
 
 ```python
 torch.softmax(ell * mask, dim = 0) # -> [0.5080, 0.1477, 0.0763, 0.1203, 0.1477]
