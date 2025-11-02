@@ -34,7 +34,7 @@
 
 ## about me
 
-I am a Senior Software Engineer on the Gboard team at Google and a PhD student in NLP in the [Okazaki Lab](https://www.nlp.c.titech.ac.jp/index.en.html) at the Tokyo Institute of Technology. Through most of my PhD, I was also a student researcher at Google Tokyo (also on the Gboard team). Prior to this, I was a software engineer at Google, (again on Gboard). I did my MS in Computer Science at Yonsei University and my BS in Discrete Mathematics with a minor in Korean at Georgia Tech.
+I am a Senior Software Engineer on the Gboard team at Google and a PhD student in NLP in the [Okazaki Lab](https://www.nlp.c.titech.ac.jp/index.en.html) at the Tokyo Institute of Technology. Through most of my PhD, I was also a student researcher at Google Tokyo (also on the Gboard team). Prior to this, I was a software engineer at Google (again on Gboard). I did my MS in Computer Science at Yonsei University and my BS in Discrete Mathematics with a minor in Korean at Georgia Tech.
 
 I am always open to chatting about interesting topics. Please feel free to send me an email ([lastname].[firstname]@gmail.com).
 
