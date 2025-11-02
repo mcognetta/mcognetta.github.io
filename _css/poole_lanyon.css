@@ -146,11 +146,17 @@
     border-bottom: 1px dotted #e5e5e5;
   }
   
-  img {
-    display: block;
-    margin: 0 0 1rem;
-    border-radius: 5px;
-  }
+
+  /* Wrapper for scrollable content */
+img, 
+.math-display,
+.katex-display {
+  max-width: 100%;
+  overflow-x: auto;
+  display: block;
+ /* Optional: visual indicator */
+  padding: 8px; /* Optional: some spacing */
+}
   
   /* Tables */
   table {
@@ -338,7 +344,7 @@
       display: none;
     }
   }
-  
+
   
   /*
    * Sidebar

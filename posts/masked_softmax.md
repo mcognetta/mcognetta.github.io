@@ -70,8 +70,9 @@ masked_probs = torch.softmax(ell + mask.log(), dim = 0) # -> [0.7210, 0.0000, 0.
 These two approaches are equivalent. Let $x, y, z$ be logit values and suppose we have a mask that says that $x$ and $y$ are valid and $z$ should be masked out.
 
 Then, the first approach first computes: 
+
 $$
-p_x = \frac{e^x}{e^x + e^y + e^z}, p_y = \frac{e^y}{e^x + e^y + e^z}, p_z = \frac{e^z}{e^x + e^y + e^z}
+p_x = \frac{e^x}{e^x + e^y + e^z},~~p_y = \frac{e^y}{e^x + e^y + e^z},~~p_z = \frac{e^z}{e^x + e^y + e^z}
 $$
 When we mask out $p_z$, the sum $p_x + p_y + 0 \le 1$, so we need to renormalize with the sum of the unmasked probabilities $p_x + p_y$. Now, the new probabilities are:
 
