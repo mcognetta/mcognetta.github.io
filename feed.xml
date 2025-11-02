@@ -23,6 +23,25 @@
 
 <item>
   <title>
+    <![CDATA[  Masked Softmax Layers in PyTorch  ]]>
+  </title>
+  <link> https://mcognetta.github.io/posts/masked_softmax/index.html </link>
+  <guid> https://mcognetta.github.io/posts/masked_softmax/index.html </guid>
+  <description>
+    <![CDATA[  Correctly computing masked softmax layers.  ]]>
+  </description>  
+    
+  <pubDate>Sat, 25 Oct 2025 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Marco Cognetta</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
     <![CDATA[  Building a DDR Platform  ]]>
   </title>
   <link> https://mcognetta.github.io/posts/building-a-ddr-platform/index.html </link>
