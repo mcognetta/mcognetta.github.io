@@ -161,7 +161,9 @@ html {
 
 .franklin-content table.fndef  {
     margin: 0;
-    margin-bottom: 10px;}
+    margin-bottom: 10px;
+    width: 100%}
+
 .franklin-content .fndef tr, td {
     padding: 0;
     border: 0;
@@ -204,12 +206,7 @@ body { counter-reset: eqnum; }
 .katex-display .katex {
     display: inline-block; } /* overwrite katex settings */
 
-.katex-display::after {
-    counter-increment: eqnum;
-    content: "(" counter(eqnum) ")";
-    position: relative;
-    float: right;
-    padding-right: 5px; }
+
 
 /* ==================================================================
     CODE & HIGHLIGHT.JS
