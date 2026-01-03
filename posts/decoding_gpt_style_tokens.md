@@ -5,7 +5,7 @@
 @def rss_description = "Decoding the GPT-style token representation."
 @def rss_pubdate = Date(2026, 01, 04)
 
-# Decoding GPT-style Tokens
+# Decoding GPT-Style Tokens
 
 If you go and look at some tokenizers on HuggingFace, sometimes you will encounter tokens in a vocabulary or merge list that look like gibberish. For example, in the [Llama3 tokenizer](https://huggingface.co/meta-llama/Meta-Llama-3-8B/blob/main/tokenizer.json), you can find tokens like:
 
