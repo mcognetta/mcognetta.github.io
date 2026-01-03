@@ -23,6 +23,25 @@
 
 <item>
   <title>
+    <![CDATA[  Decoding GPT-Style Tokens  ]]>
+  </title>
+  <link> https://mcognetta.github.io/posts/decoding_gpt_style_tokens/index.html </link>
+  <guid> https://mcognetta.github.io/posts/decoding_gpt_style_tokens/index.html </guid>
+  <description>
+    <![CDATA[  Decoding the GPT-style token representation.  ]]>
+  </description>  
+    
+  <pubDate>Sun, 04 Jan 2026 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Marco Cognetta</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
     <![CDATA[  Masked Softmax Layers in PyTorch  ]]>
   </title>
   <link> https://mcognetta.github.io/posts/masked_softmax/index.html </link>
