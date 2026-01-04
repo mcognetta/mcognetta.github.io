@@ -55,28 +55,26 @@ html {
 /* ==================================================================
     TEXT GEOMETRY
 ================================================================== */
-
+/* BASE — phones & tablets — edge to edge */
 .franklin-content {
     position: relative;
-    padding-left: 12.5%;
-    padding-right: 12.5%;
-    line-height: 1.35em; }
+    width: 100%;
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+    line-height: 1.35em;
+}
 
-/* on wide screens, fix content width to a max value */
+/* DESKTOP — fixed readable width, centered */
 @media (min-width: 940px) {
     .franklin-content {
-        width: 705px;
+        max-width: 705px;
         margin-left: auto;
-        margin-right: auto; }
+        margin-right: auto;
+        padding-left: 0;
+        padding-right: 0;
     }
-
-/* on narrow device, reduce margins */
-@media (max-width: 480px) {
-    .franklin-content {
-        padding-left: 6%;
-        padding-right: 6%; }
-    }
-
+}
 /* ==================================================================
     TITLES
 ================================================================== */
@@ -226,7 +224,7 @@ code {
     /* font-size: 90%; } */
 
 .hljs {
-    font-size: 90%;
+    font-size: 75%;
     line-height: 1.35em;
     border-radius: 10px; }
 
