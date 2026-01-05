@@ -35,7 +35,7 @@ which are pretty much meaningless to a human.[^1]
 
 You may already be aware that the Ġ character [signifies a space at the beginning of a word](https://en.wikipedia.org/wiki/%C4%A0#Computer_encoding), but how about the rest? They come from the fact that GPT-style tokenizers are *byte-level* tokenizers -- the base character is a byte and we treat the input as the byte sequence of its Unicode UTF8 encoding.
 
-So, assuming the token we want to look at represents a valid byte sequence, we'd like to be able to quickly get its original Unicode representation for tasks like auditing the tokenizer vocabulary, assessing the diversity of languages, or building the required subword automata for [constrained generation](https://arxiv.org/abs/2407.08103).
+So, assuming the token we want to look at represents a valid byte sequence, we'd like to be able to quickly get its original Unicode representation for tasks like auditing the tokenizer vocabulary, assessing the diversity of languages in the tokenizer, or building the required subword automata for [constrained generation](https://arxiv.org/abs/2407.08103).
 
 ## Token Encoding/Decoding
 
