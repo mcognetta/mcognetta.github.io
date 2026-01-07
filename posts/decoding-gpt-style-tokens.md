@@ -105,6 +105,11 @@ decode_token("ĠÐ½ÑĥÐ¶Ð½Ð¾") # -> ' нужно'
 
 This token encoding is present in the HuggingFace Tokenizers library, via the `ByteLevel` decoder. The `byte_to_unicode()` function is reimplemented [here](https://github.com/huggingface/tokenizers/blob/ecad3f18a3e340635f5393cfb22cf70d3502f64a/tokenizers/src/pre_tokenizers/byte_level.rs#L15) and is utilized in the `ByteLevel` normalizer [here](https://github.com/huggingface/tokenizers/blob/ecad3f18a3e340635f5393cfb22cf70d3502f64a/tokenizers/src/normalizers/byte_level.rs#L41). One potential edge case is that the current `ByteLevel` implementation assumes that the exact GPT byte-to-character mapping is used by the tokenizer. However, one could easily define another byte-to-character mapping which would then not be supported by HuggingFace (though I have no examples of this in practice, and there may be some workaround within Tokenizers that I am unaware of). 
 
+## Addendum:
+I was pointed to two other resources about this:
+
+- A [blog post](https://stephantul.github.io/blog/bpe/) by Stéphan Tulkens that covers this exact topic.
+- An [implementation](https://github.com/bauwenst/TkTkT/blob/ee4ea2329fbe1f8a53b65bbc0d119288c5caf1ec/src/tktkt/preparation/mappers.py#L376-L437) in The ToKeniser ToolKiT (TkTkT), from Thomas Bauwens.
 
 
 -----------------------------------
