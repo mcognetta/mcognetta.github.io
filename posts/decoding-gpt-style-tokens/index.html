@@ -46,6 +46,14 @@ encode_token(<span class=hljs-string >&#x27; нужно&#x27;</span>) <span clas
 decode_token(<span class=hljs-string >&quot;ĠÐ½ÑĥÐ¶Ð½Ð¾&quot;</span>) <span class=hljs-comment ># -&gt; &#x27; нужно&#x27;</span></code></pre>
 <h2 id=huggingface_tokenizers_implementation ><a href="#huggingface_tokenizers_implementation" class=header-anchor >HuggingFace Tokenizers&#39; Implementation</a></h2>
 <p>This token encoding is present in the HuggingFace Tokenizers library, via the <code>ByteLevel</code> decoder. The <code>byte_to_unicode&#40;&#41;</code> function is reimplemented <a href="https://github.com/huggingface/tokenizers/blob/ecad3f18a3e340635f5393cfb22cf70d3502f64a/tokenizers/src/pre_tokenizers/byte_level.rs#L15">here</a> and is utilized in the <code>ByteLevel</code> normalizer <a href="https://github.com/huggingface/tokenizers/blob/ecad3f18a3e340635f5393cfb22cf70d3502f64a/tokenizers/src/normalizers/byte_level.rs#L41">here</a>. One potential edge case is that the current <code>ByteLevel</code> implementation assumes that the exact GPT byte-to-character mapping is used by the tokenizer. However, one could easily define another byte-to-character mapping which would then not be supported by HuggingFace &#40;though I have no examples of this in practice, and there may be some workaround within Tokenizers that I am unaware of&#41;. </p>
+<h2 id=addendum ><a href="#addendum" class=header-anchor >Addendum:</a></h2>
+<p>I was pointed to two other resources about this:</p>
+<ul>
+<li><p>A <a href="https://stephantul.github.io/blog/bpe/">blog post</a> by Stéphan Tulkens that covers this exact topic.</p>
+
+<li><p>An <a href="https://github.com/bauwenst/TkTkT/blob/ee4ea2329fbe1f8a53b65bbc0d119288c5caf1ec/src/tktkt/preparation/mappers.py#L376-L437">implementation</a> in The ToKeniser ToolKiT &#40;TkTkT&#41;, from Thomas Bauwens.</p>
+
+</ul>
 <hr />
 <p><table class=fndef  id="fndef:1">
     <tr>
