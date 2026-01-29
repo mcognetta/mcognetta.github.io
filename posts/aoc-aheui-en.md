@@ -1,7 +1,7 @@
 @def title = "Solving (and Animating) Advent of Code Day 1 with 아희"
 @def date = "12/29/2021"
 @def tags = ["aheui", "manim", "python", "아희"]
-
+@def image = "/assets/aheui-aoc-post/aheui_header.png"
 @def rss_pubdate = Date(2021, 12, 29)
 
 # Solving (and Animating) Advent of Code Day 1 with 아희

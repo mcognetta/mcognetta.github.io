@@ -1,7 +1,7 @@
 @def title = "Finding a Random Seed That Solves a LeetCode Problem"
 @def date = "11/20/2023"
 @def tags = ["python", "leetcode", "random"]
-
+@def image = "/assets/lichess-random-seed-post/leetcode_random_seed_header.png"
 @def rss_pubdate = Date(2023, 11, 20)
 
 # Finding a Random Seed That Solves a LeetCode Problem
