@@ -1,6 +1,7 @@
 @def title = "theoretically good with computers"
 
 ## recent updates
+  * (2025-11) I successfully defended my thesis, *Practical and Theoretical Aspects of Tokenization*, and will graduate in March.
   * (2025-10) I've moved back to the US and started again full time at Google on the Gboard team.
   * (2025-08) *Tokenization as Finite-State Transduction* was accepted to Computational Linguistics. [[Paper]](https://direct.mit.edu/coli/article/doi/10.1162/coli.a.23/132855/Tokenization-as-Finite-State-Transduction) [[Code]](https://github.com/mcognetta/tokenization-as-finite-state-transduction)
   
@@ -24,7 +25,7 @@
 
   * (2023-05) I presented *Parameter-Efficient Korean Character-Level Language Modeling* at EACL2023. The paper can be found [here](https://aclanthology.org/2023.eacl-main.172/).
 
-  * (2022-11) I've joined Mastodon on the [sigmoid.social](https://sigmoid.social/about) instance, which is focused on the ML/AI research community. My profile is [@mc@sigmoid.social](https://sigmoid.social/@mc).
+  <!-- * (2022-11) I've joined Mastodon on the [sigmoid.social](https://sigmoid.social/about) instance, which is focused on the ML/AI research community. My profile is [@mc@sigmoid.social](https://sigmoid.social/@mc). -->
 
   * (2022-04) I've moved to Tokyo to join the [Okazaki Lab](https://www.nlp.c.titech.ac.jp/) for my PhD. I'll continue working part time at Google Tokyo.
 
