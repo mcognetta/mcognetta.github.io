@@ -1,6 +1,7 @@
 @def title = "blunder.clinic, dont blunder"
 @def date = "03/11/2026"
 @def tags = ["chess"]
+@def image = "/assets/blunder-clinic-post/header_image.png"
 
 @def rss_description = "Launching blunder.clinic, realistic daily chess puzzles."
 @def rss_pubdate = Date(2026, 03, 11)
