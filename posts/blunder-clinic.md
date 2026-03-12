@@ -9,6 +9,8 @@
 
 # blunder.clinic - dont blunder
 
+**Discuss on other sites:** [HackerNews](https://news.ycombinator.com/item?id=47355063), [Lichess](https://lichess.org/@/fruitdealer2002/blog/blunderclinic-dont-blunder/oNSyIUBb)
+
 Today, I launched [blunder.clinic](https://blunder.clinic), a daily chess puzzle app that provides realistic positions for you to try to not blunder on. These are similar to traditional chess puzzles (i.e., tactics), but different in a few key ways.
 
 There are two popular ways to self-study chess: tactics and following along with professional games or with an engine. These are obviously helpful, but both have downsides.
