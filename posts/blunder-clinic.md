@@ -13,7 +13,7 @@ Today, I launched [blunder.clinic](https://blunder.clinic), a daily chess puzzle
 
 There are two popular ways to self-study chess: tactics and following along with professional games or with an engine. These are obviously helpful, but both have downsides.
 
-When playing puzzles, just by knowing you are playing a puzzle means that you are biased towards looking for specific types of moves (tactical, crushing moves, etc.). But in real life, you don't know what positions actually have tactics available, so you can waste your time looking for tactics, or, even worse, make a blunder by *thinking* there is a tactic when there really isn't.
+When playing puzzles, just by knowing you are playing a puzzle means that you are biased towards looking for specific types of moves (checkmates, queen sacrifices, etc.). But in real life, you don't know what positions actually have tactics available, so you can waste your time looking for tactics, or, even worse, make a blunder by *thinking* there is a tactic when there really isn't.
 
 When following along with an engine, there are tons of positions where an engine comes up with a move that you simply would never have seen and can't possibly understand. These are very low signal for learners, and it is hard to differentiate between positions like that and high-signal positions that are on the edge of your ability.[^1]
 
