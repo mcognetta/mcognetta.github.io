@@ -23,6 +23,25 @@
 
 <item>
   <title>
+    <![CDATA[  blunder.clinic, dont blunder  ]]>
+  </title>
+  <link> https://mcognetta.github.io/posts/blunder_clinic/index.html </link>
+  <guid> https://mcognetta.github.io/posts/blunder_clinic/index.html </guid>
+  <description>
+    <![CDATA[  Launching blunder.clinic, realistic daily chess puzzles.  ]]>
+  </description>  
+    
+  <pubDate>Wed, 11 Mar 2026 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Marco Cognetta</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
     <![CDATA[  Decoding GPT-Style Tokens  ]]>
   </title>
   <link> https://mcognetta.github.io/posts/decoding-gpt-style-tokens/index.html </link>
