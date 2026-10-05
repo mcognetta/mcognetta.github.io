@@ -1,6 +1,8 @@
 @def title = "theoretically good with computers"
 
 ## recent updates
+  * [Tokenization: A Survey for Modern NLP](https://www.alphaxiv.org/abs/2609.tokenization-survey-modern-nlp) was published on alphaXiv. This was a group effort by 32 (!) tokenizer researchers to compile the most comprehensive survey of the field to date.
+  * (2026-09) I contributed an [article](https://www.tokyodev.com/articles/doing-a-machine-learning-phd-while-working-in-japan) to TokyoDev about my experience doing a PhD while working in Japan.
   * (2025-11) I successfully defended my thesis, *Practical and Theoretical Aspects of Tokenization*, and will graduate in March.
   * (2025-10) I've moved back to the US and started again full time at Google on the Gboard team.
   * (2025-08) *Tokenization as Finite-State Transduction* was accepted to Computational Linguistics. [[Paper]](https://direct.mit.edu/coli/article/doi/10.1162/coli.a.23/132855/Tokenization-as-Finite-State-Transduction) [[Code]](https://github.com/mcognetta/tokenization-as-finite-state-transduction)
